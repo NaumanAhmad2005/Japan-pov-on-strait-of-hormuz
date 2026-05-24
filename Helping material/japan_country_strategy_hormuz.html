@@ -1,0 +1,365 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.nav{display:flex;flex-wrap:wrap;gap:6px;padding:.75rem 0 1rem;border-bottom:0.5px solid var(--color-border-tertiary);margin-bottom:1.25rem}
+.nav button{font-size:12px;padding:5px 12px;border-radius:16px;border:0.5px solid var(--color-border-secondary);background:var(--color-background-secondary);color:var(--color-text-secondary);cursor:pointer;transition:all .15s}
+.nav button.active{background:#185FA5;color:#E6F1FB;border-color:#185FA5;font-weight:500}
+.nav button:hover:not(.active){background:var(--color-background-tertiary)}
+.tab{display:none}.tab.active{display:block}
+h2{font-size:17px;font-weight:500;color:var(--color-text-primary);margin-bottom:1rem}
+h3{font-size:14px;font-weight:500;color:var(--color-text-primary);margin:.9rem 0 .4rem}
+p,li{font-size:13.5px;color:var(--color-text-secondary);line-height:1.7}
+ul{padding-left:1.1rem}
+li{margin-bottom:.3rem}
+.card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:.9rem 1.1rem;margin-bottom:.9rem}
+.country-card{border-radius:var(--border-radius-lg);padding:.85rem 1.1rem;margin-bottom:.75rem;border:0.5px solid var(--color-border-tertiary)}
+.ally{background:var(--color-background-primary);border-left:3px solid #1D9E75}
+.swing{background:var(--color-background-primary);border-left:3px solid #EF9F27}
+.threat{background:var(--color-background-primary);border-left:3px solid #E24B4A}
+.neutral{background:var(--color-background-primary);border-left:3px solid #888780}
+.flag{font-size:18px;margin-right:6px}
+.c-head{display:flex;align-items:center;gap:8px;margin-bottom:.5rem;flex-wrap:wrap}
+.c-name{font-size:14px;font-weight:500;color:var(--color-text-primary)}
+.badge{display:inline-block;font-size:11px;padding:2px 9px;border-radius:10px;font-weight:500}
+.b-ally{background:#E1F5EE;color:#085041}
+.b-swing{background:#FAEEDA;color:#633806}
+.b-threat{background:#FCEBEB;color:#791F1F}
+.b-neutral{background:#F1EFE8;color:#444441}
+.b-blue{background:#E6F1FB;color:#0C447C}
+.rebuttal{background:var(--color-background-secondary);border-left:2px solid #185FA5;padding:.6rem .85rem;border-radius:0 6px 6px 0;font-size:13px;color:var(--color-text-primary);line-height:1.75;font-style:italic;margin:.5rem 0}
+.mini-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;margin:.75rem 0}
+.mini-card{border-radius:var(--border-radius-md);padding:.65rem .85rem;font-size:12.5px;font-weight:500;text-align:center}
+.mc-green{background:#EAF3DE;color:#27500A}
+.mc-amber{background:#FAEEDA;color:#633806}
+.mc-red{background:#FCEBEB;color:#791F1F}
+.mc-gray{background:#F1EFE8;color:#444441}
+.label-sm{font-size:11px;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px}
+.sep{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:.9rem 0}
+.target-badge{display:inline-flex;align-items:center;gap:4px;font-size:11px;padding:3px 10px;border-radius:12px;background:#E6F1FB;color:#0C447C;font-weight:500}
+</style>
+
+<div style="padding:.75rem 0 0">
+
+<div style="display:flex;align-items:center;gap:10px;margin-bottom:1rem">
+  <span style="font-size:24px">🇯🇵</span>
+  <div>
+    <p style="font-size:15px;font-weight:500;color:var(--color-text-primary);margin:0">Japan — Room Control Strategy</p>
+    <p style="font-size:12px;color:var(--color-text-secondary);margin:0">24-country analysis · Strait of Hormuz · UNSC</p>
+  </div>
+</div>
+
+<div class="nav">
+  <button class="active" onclick="show('map')">🗺 Room Map</button>
+  <button onclick="show('allies')">🟢 Target Allies</button>
+  <button onclick="show('swing')">🟡 Flip These</button>
+  <button onclick="show('threats')">🔴 Defend Against</button>
+  <button onclick="show('rebuttal')">⚔️ Rebuttals</button>
+  <button onclick="show('winplan')">🏆 Win Plan</button>
+</div>
+
+<!-- ROOM MAP -->
+<div id="map" class="tab active">
+<h2>Room at a glance</h2>
+<div class="mini-grid">
+  <div class="mini-card mc-green">🇰🇷 S. Korea<br><span style="font-weight:400;font-size:11px">Strongest ally</span></div>
+  <div class="mini-card mc-green">🇮🇳 India<br><span style="font-weight:400;font-size:11px">Energy bloc ally</span></div>
+  <div class="mini-card mc-green">🇩🇪 Germany<br><span style="font-weight:400;font-size:11px">JCPOA partner</span></div>
+  <div class="mini-card mc-green">🇫🇷 France<br><span style="font-weight:400;font-size:11px">Resolution co-sponsor</span></div>
+  <div class="mini-card mc-green">🇶🇦 Qatar<br><span style="font-weight:400;font-size:11px">LNG trade ally</span></div>
+  <div class="mini-card mc-green">🇴🇲 Oman<br><span style="font-weight:400;font-size:11px">Mediator bloc</span></div>
+  <div class="mini-card mc-green">🇰🇼 Kuwait<br><span style="font-weight:400;font-size:11px">Economic ally</span></div>
+  <div class="mini-card mc-amber">🇦🇪 UAE<br><span style="font-weight:400;font-size:11px">Win over</span></div>
+  <div class="mini-card mc-amber">🇸🇦 Saudi Arabia<br><span style="font-weight:400;font-size:11px">Economic common ground</span></div>
+  <div class="mini-card mc-amber">🇹🇷 Türkiye<br><span style="font-weight:400;font-size:11px">Swing — broker framing</span></div>
+  <div class="mini-card mc-amber">🇵🇰 Pakistan<br><span style="font-weight:400;font-size:11px">Energy-poor, convince</span></div>
+  <div class="mini-card mc-amber">🇮🇶 Iraq<br><span style="font-weight:400;font-size:11px">Caught in middle</span></div>
+  <div class="mini-card mc-amber">🇯🇴 Jordan<br><span style="font-weight:400;font-size:11px">Safe swing vote</span></div>
+  <div class="mini-card mc-amber">🇧🇭 Bahrain<br><span style="font-weight:400;font-size:11px">US-leaning, manageable</span></div>
+  <div class="mini-card mc-red">🇮🇷 Iran<br><span style="font-weight:400;font-size:11px">Main antagonist</span></div>
+  <div class="mini-card mc-red">🇷🇺 Russia<br><span style="font-weight:400;font-size:11px">Will try to veto</span></div>
+  <div class="mini-card mc-red">🇨🇳 China<br><span style="font-weight:400;font-size:11px">Partial threat / partial ally</span></div>
+  <div class="mini-card mc-red">🇮🇱 Israel<br><span style="font-weight:400;font-size:11px">Pushes military — oppose</span></div>
+  <div class="mini-card mc-red">🇺🇸 USA<br><span style="font-weight:400;font-size:11px">Ally but militarist risk</span></div>
+  <div class="mini-card mc-red">🇾🇪 Yemen<br><span style="font-weight:400;font-size:11px">Houthi angle — isolate</span></div>
+  <div class="mini-card mc-gray">🇬🇧 UK<br><span style="font-weight:400;font-size:11px">Mostly aligned</span></div>
+  <div class="mini-card mc-gray">🇱🇧 Lebanon<br><span style="font-weight:400;font-size:11px">Iran-adjacent</span></div>
+  <div class="mini-card mc-gray">🇸🇾 Syria<br><span style="font-weight:400;font-size:11px">Russia/Iran bloc</span></div>
+</div>
+<div class="card" style="margin-top:.5rem">
+  <div class="label-sm">Vote math (you need 9/15 in UNSC, no P5 veto)</div>
+  <p>Your realistic coalition: Japan + South Korea + India + Germany + France + UK + Qatar + Oman + Kuwait + Jordan + Pakistan = <strong>11 potential votes.</strong> China and Russia are your veto threats — soften them with the non-military framing. USA is an ally but must be steered away from pushing military clauses that lose you the rest.</p>
+</div>
+</div>
+
+<!-- ALLIES -->
+<div id="allies" class="tab">
+<h2>🟢 Target Allies — Recruit & Co-sponsor</h2>
+
+<div class="country-card ally">
+  <div class="c-head"><span class="flag">🇰🇷</span><span class="c-name">South Korea</span><span class="badge b-ally">Priority #1</span></div>
+  <p><strong>Why they're your best ally:</strong> South Korea imports ~70% of oil via Hormuz. Identical dependency to Japan. Both are US security allies with independent foreign policies on Iran.</p>
+  <h3>What to say in unmod:</h3>
+  <div class="rebuttal">"South Korea and Japan are in the same boat — literally. Our economies live and die by the Strait of Hormuz. Let's co-sponsor this resolution together. A Japan-South Korea joint working paper sends a powerful signal that Asia's economic giants stand united."</div>
+  <p><strong>What to offer:</strong> Let them co-author OP clauses on IEA emergency reserves — they care deeply about that. Split the speaking time fairly.</p>
+</div>
+
+<div class="country-card ally">
+  <div class="c-head"><span class="flag">🇮🇳</span><span class="c-name">India</span><span class="badge b-ally">Priority #2</span></div>
+  <p><strong>Why they matter:</strong> India is the world's 3rd largest oil importer; ~60% via Hormuz. India also has historical non-aligned movement credentials — getting India on your paper makes it look truly multilateral, not Western.</p>
+  <h3>What to say:</h3>
+  <div class="rebuttal">"India and Japan share a vision of a free and open Indo-Pacific. That vision must extend to the Persian Gulf. Join us in the energy-dependent nations bloc — our voice together cannot be dismissed as Western interference."</div>
+  <p><strong>Bonus:</strong> India-Iran have the Chabahar port deal — India won't want to antagonize Iran. So use India to soften your Iran language in the resolution.</p>
+</div>
+
+<div class="country-card ally">
+  <div class="c-head"><span class="flag">🇩🇪</span><span class="c-name">Germany</span><span class="badge b-ally">JCPOA bloc</span></div>
+  <p><strong>Why:</strong> Germany is the EU's most vocal JCPOA supporter. They co-designed the INSTEX mechanism to bypass US sanctions for Iran trade. Their stance is identical to Japan's on diplomacy-first.</p>
+  <div class="rebuttal">"Germany and Japan pioneered the E3+3 diplomatic track. Let's ensure this resolution explicitly calls for resuming that framework. We draft the diplomatic clauses together."</div>
+</div>
+
+<div class="country-card ally">
+  <div class="c-head"><span class="flag">🇫🇷</span><span class="c-name">France</span><span class="badge b-ally">P5 ally</span></div>
+  <p><strong>Critical value:</strong> France is a P5 member. If France co-sponsors your resolution, it's automatically harder for Russia/China to veto without looking like they're blocking a balanced paper.</p>
+  <div class="rebuttal">"France co-led the JCPOA negotiations. France has maintained naval presence in the Gulf without triggering escalation. Help us anchor this resolution in that same balanced tradition."</div>
+</div>
+
+<div class="country-card ally">
+  <div class="c-head"><span class="flag">🇶🇦</span><span class="c-name">Qatar</span><span class="badge b-ally">LNG lifeline</span></div>
+  <p><strong>Why:</strong> Qatar is the world's top LNG exporter — ALL of it passes through Hormuz. Qatar's economy literally depends on the strait being open. Also Qatar has diplomatic relations with Iran and was the only GCC state to maintain them throughout all crises.</p>
+  <div class="rebuttal">"Qatar and Japan have a billion-dollar LNG partnership. Every tanker that moves Japan's gas passes your coast. You have as much at stake as we do — and your unique relationship with Iran makes you invaluable. Help us craft language Iran can accept."</div>
+</div>
+
+<div class="country-card ally">
+  <div class="c-head"><span class="flag">🇴🇲</span><span class="c-name">Oman</span><span class="badge b-ally">The mediator model</span></div>
+  <p><strong>Why:</strong> Oman sits on the southern shore of Hormuz. Oman has historically served as the backchannel between Iran and the USA — the secret Obama-era nuclear talks were brokered in Muscat. Oman is the most respected neutral in the Gulf.</p>
+  <div class="rebuttal">"Japan's vision of a UN Special Envoy for Gulf Security is inspired by Oman's own diplomatic tradition. We want to institutionalize what Oman has done informally for decades. Co-sponsor with us — your credibility elevates this proposal enormously."</div>
+</div>
+
+<div class="country-card ally">
+  <div class="c-head"><span class="flag">🇰🇼</span><span class="c-name">Kuwait</span><span class="badge b-ally">Easy win</span></div>
+  <p>Kuwait exports oil through Hormuz, experienced Iraqi invasion in 1990, deeply values UNSC authority and multilateral security. Very easy to convince — they want rules-based order more than anyone.</p>
+  <div class="rebuttal">"Kuwait knows better than anyone what happens when international law is ignored in the Gulf. Help us ensure that never happens again — through the UNSC, through law, not through unilateral action."</div>
+</div>
+</div>
+
+<!-- SWING STATES -->
+<div id="swing" class="tab">
+<h2>🟡 Swing States — Flip to Your Side</h2>
+
+<div class="country-card swing">
+  <div class="c-head"><span class="flag">🇦🇪</span><span class="c-name">UAE</span><span class="badge b-swing">High value flip</span></div>
+  <p><strong>Their position:</strong> UAE wants the strait open (Abu Dhabi Ports = massive trade hub) but is deeply anti-Iran and pro-US military presence. They also just normalized with Israel. Will lean toward stronger enforcement language.</p>
+  <p><strong>The tension to exploit:</strong> UAE's economy is built on being a global trade hub. A militarized Gulf is bad for Dubai's image. Use that.</p>
+  <div class="rebuttal">"Dubai's status as the world's trade hub depends on a stable, open Gulf. Japan's proposal — monitoring, not militarization — protects that stability without turning the region into a theater of war. A military confrontation in Hormuz would damage Dubai's port traffic more than any Iranian threat."</div>
+  <p><strong>Concession to offer:</strong> Include language condemning tanker seizures specifically (UAE had a tanker seized) — they'll appreciate the acknowledgment.</p>
+</div>
+
+<div class="country-card swing">
+  <div class="c-head"><span class="flag">🇸🇦</span><span class="c-name">Saudi Arabia</span><span class="badge b-swing">Economic common ground</span></div>
+  <p><strong>Their position:</strong> Saudi Arabia exports oil through Hormuz but also has the East-West Pipeline as an alternate route. They're anti-Iran, pro-US, but also don't want a full-scale war that devastates oil prices and regional stability.</p>
+  <div class="rebuttal">"Saudi Arabia's Vision 2030 depends on a stable Gulf. Japan is Saudi Arabia's top Asian investment partner. We share $10B+ in economic ties. Help us craft a resolution that de-escalates without emboldening Iran — Japan can support stronger sanctions language IF the diplomatic track is also preserved."</div>
+  <p><strong>Trade:</strong> Offer to include a clause condemning Iran's support for Houthi attacks on Saudi infrastructure — Saudi Arabia will appreciate this and it costs you little diplomatically.</p>
+</div>
+
+<div class="country-card swing">
+  <div class="c-head"><span class="flag">🇹🇷</span><span class="c-name">Türkiye</span><span class="badge b-swing">Independent broker</span></div>
+  <p><strong>Their position:</strong> Turkey is NATO but runs its own foreign policy. Maintained Iran trade during sanctions, mediates in Ukraine, refuses to be told what to do. They'll respect Japan's independent stance.</p>
+  <div class="rebuttal">"Japan and Turkey both understand what it means to pursue principled independent foreign policy in a world of great power pressure. Our proposal doesn't ask Turkey to choose sides — it asks Turkey to help build a framework that serves everyone. That's exactly Turkey's brand of diplomacy."</div>
+  <p><strong>Frame for Turkey:</strong> "A neutral UNSC monitoring body — not NATO, not US-led — is exactly what Turkey has always argued for in multilateral security contexts."</p>
+</div>
+
+<div class="country-card swing">
+  <div class="c-head"><span class="flag">🇵🇰</span><span class="c-name">Pakistan</span><span class="badge b-swing">Energy poverty angle</span></div>
+  <p><strong>Their position:</strong> Pakistan is in an energy crisis — blackouts, fuel shortages, IMF bailouts. Any disruption in Hormuz (through which Pakistan's oil arrives) would be catastrophic. Pakistan is also close to China and Saudi Arabia.</p>
+  <div class="rebuttal">"Pakistan's people are already suffering energy shortages. A disruption in the Strait of Hormuz would not hurt Wall Street first — it would hurt Karachi first. Japan's proposal is about protecting the Global South's right to affordable energy as much as it is about great power interests. Stand with us."</div>
+  <p><strong>Pakistan's China link:</strong> If China softens (after your diplomacy with them), Pakistan follows automatically.</p>
+</div>
+
+<div class="country-card swing">
+  <div class="c-head"><span class="flag">🇮🇶</span><span class="c-name">Iraq</span><span class="badge b-swing">Caught in the middle</span></div>
+  <p><strong>Their dilemma:</strong> Iraq exports its oil through the Gulf and needs Hormuz open. But Iraq is deeply under Iranian influence politically. It's pulled two ways.</p>
+  <div class="rebuttal">"Iraq's oil revenues — the lifeblood of Iraqi reconstruction — flow through the same waters we seek to protect. Iraq does not need to choose between Iran and the world. Japan's framework respects Iranian sovereignty while securing the passage Iraq depends on. There is no contradiction."</div>
+</div>
+
+<div class="country-card swing">
+  <div class="c-head"><span class="flag">🇧🇭</span><span class="c-name">Bahrain</span><span class="badge b-swing">US 5th Fleet host</span></div>
+  <p>Bahrain hosts the US Navy's 5th Fleet. They'll lean US/military. Manageable — reassure them your proposal doesn't undermine US military presence, it just adds a UN monitoring layer on top.</p>
+  <div class="rebuttal">"Japan's monitoring proposal complements existing security architecture — it does not replace it. We're not asking Bahrain to choose between US security guarantees and the UN. We're adding a layer of international legitimacy that makes any security action more defensible."</div>
+</div>
+
+<div class="country-card swing">
+  <div class="c-head"><span class="flag">🇯🇴</span><span class="c-name">Jordan</span><span class="badge b-swing">Safe easy vote</span></div>
+  <p>Jordan has no direct stake in Hormuz but is a US ally, supports stability, and is pro-multilateralism. Easy to bring in with a general "regional stability" appeal.</p>
+  <div class="rebuttal">"Jordan has always been a voice for reason in a turbulent region. Your support for this resolution signals to the Arab world that multilateral diplomacy — not military escalation — is the path forward."</div>
+</div>
+</div>
+
+<!-- THREATS -->
+<div id="threats" class="tab">
+<h2>🔴 Threats — How to Defend Against Each</h2>
+
+<div class="country-card threat">
+  <div class="c-head"><span class="flag">🇮🇷</span><span class="c-name">Iran</span><span class="badge b-threat">Main antagonist</span></div>
+  <p><strong>What Iran will say:</strong> "The Strait of Hormuz is Iranian sovereign territory. Any UNSC intervention is Western imperialism. We have the right to close the strait in response to illegal sanctions."</p>
+  <h3>Your defense:</h3>
+  <div class="rebuttal">"Japan has never been Iran's enemy. When the tanker crisis of 2019 erupted, Japan's Prime Minister flew to Tehran — not to threaten, but to listen. Japan has maintained diplomatic relations with Iran throughout decades of pressure. We are the one voice in this room that Iran can trust to be fair. Our monitoring proposal is not targeted at Iran — it covers ALL vessels, ALL flags. Japan asks Iran: if the strait is truly peaceful and lawful, what is there to fear from neutral observation?"</div>
+  <p><strong>Legal counter:</strong> Iran signed UNCLOS. Article 38 applies. You cannot legally close an international strait in peacetime — cite this clearly.</p>
+</div>
+
+<div class="country-card threat">
+  <div class="c-head"><span class="flag">🇷🇺</span><span class="c-name">Russian Federation</span><span class="badge b-threat">Veto threat</span></div>
+  <p><strong>What Russia will say:</strong> "This is another Western attempt to use the UNSC to encircle Iran and justify future military action. Russia will not allow the Council to be weaponized against a sovereign state."</p>
+  <h3>Your defense:</h3>
+  <div class="rebuttal">"Japan is not a Western power in the political sense — we are the one P5-adjacent nation that chose NOT to join the US-led Operation Sentinel. We deliberately kept our distance from US military command to preserve exactly this neutrality. Our proposal has NO military component. It is an observation and diplomatic mission — the same kind Russia supported in past Gulf contexts. We ask Russia: do you oppose transparency in international waters? Or only when it's inconvenient?"</div>
+  <p><strong>Key move:</strong> Find a clause Russia can claim as a win — include language calling on ALL nations to refrain from unilateral sanctions that escalate tensions (this implicitly critiques US sanctions without naming them — Russia loves this).</p>
+</div>
+
+<div class="country-card threat">
+  <div class="c-head"><span class="flag">🇨🇳</span><span class="c-name">China</span><span class="badge b-threat">Complex — partial threat</span></div>
+  <p><strong>What China will say:</strong> "China opposes any UNSC mechanism that could be used to justify interference in the internal affairs of regional states. The root cause is US sanctions and military presence — address that first."</p>
+  <h3>Your defense:</h3>
+  <div class="rebuttal">"China and Japan are both massive energy importers through Hormuz. Every barrel of oil China receives from the Gulf transits the same 33 kilometers we are discussing. We are in the same position of vulnerability. Japan's proposal explicitly calls for UNSC-mandated observation — not US-led, not NATO-led. It is exactly the multilateral framework China has always championed. Furthermore, our resolution calls for JCPOA revival — which China co-authored. Help us pass what China helped design."</div>
+  <p><strong>Private unmod pitch:</strong> Offer China a co-sponsorship role on the JCPOA revival clause specifically. Let China take credit for the diplomatic section — they get the win, you get the monitoring clause.</p>
+</div>
+
+<div class="country-card threat">
+  <div class="c-head"><span class="flag">🇺🇸</span><span class="c-name">United States</span><span class="badge b-threat">Ally gone rogue risk</span></div>
+  <p><strong>The risk:</strong> USA will push for stronger enforcement language, possibly military authorization, which would kill China/Russia support and blow up your coalition.</p>
+  <h3>How to manage:</h3>
+  <div class="rebuttal">"The United States' commitment to Gulf security is unquestioned. But Japan has learned — as a nation that has deployed forces to the region — that legitimacy matters as much as capability. A UNSC-authorized mission carries legal and diplomatic weight that a unilateral coalition does not. Help us give the right response the right authority. A UN monitoring mandate does not weaken American presence — it validates it."</div>
+  <p><strong>Red line to USA:</strong> Privately — "We will support language on Iranian violations of UNCLOS IF you drop the military authorization clause. Let's get 9 votes instead of a veto."</p>
+</div>
+
+<div class="country-card threat">
+  <div class="c-head"><span class="flag">🇮🇱</span><span class="c-name">Israel</span><span class="badge b-threat">Escalation pusher</span></div>
+  <p><strong>What Israel will say:</strong> "Iran's nuclear program and its proxy network — Hamas, Hezbollah, Houthis — are the root cause. Any resolution that doesn't address Iranian military capability is toothless."</p>
+  <h3>Your defense:</h3>
+  <div class="rebuttal">"Japan understands Israel's security concerns. But this Council must be precise in its mandate. We are here to secure maritime passage in the Strait of Hormuz — not to relitigate the entire Iran-Israel conflict in one resolution. Conflating these issues will guarantee a veto and guarantee nothing gets done. Japan's approach delivers concrete, achievable results now. Broader security architecture is a parallel track — and Japan supports addressing it there."</div>
+  <p><strong>Tactical move:</strong> Do not let Israel's framing dominate the debate. If they go off-topic, raise a Point of Order — "The delegate's remarks exceed the scope of the present agenda."</p>
+</div>
+
+<div class="country-card threat">
+  <div class="c-head"><span class="flag">🇾🇪</span><span class="c-name">Yemen</span><span class="badge b-threat">Houthi spillover</span></div>
+  <p><strong>What Yemen (or its representatives) will say:</strong> Likely references the Saudi-led blockade, humanitarian crisis, and Houthi attacks as retaliatory to Western aggression.</p>
+  <h3>Your defense:</h3>
+  <div class="rebuttal">"Japan deeply sympathizes with Yemen's humanitarian catastrophe. However, the Houthi attacks on commercial vessels in the Red Sea and Gulf of Aden represent a serious escalation of the exact lawlessness we seek to prevent in Hormuz. Japan supports a separate UNSC track for Yemen peace — and our delegation is willing to include humanitarian access language in this resolution as a gesture of good faith to Yemen's civilian population."</div>
+</div>
+
+<div class="country-card threat">
+  <div class="c-head"><span class="flag">🇸🇾</span><span class="c-name">Syria</span><span class="badge b-neutral">Russia/Iran echo</span></div>
+  <p>Syria will likely echo Russia and Iran's position — oppose any UNSC mechanism as interference. They have little credibility in this committee given their own Security Council record. Don't waste time engaging them directly. Isolate them by building your coalition so large that Syria becomes irrelevant.</p>
+</div>
+
+<div class="country-card threat">
+  <div class="c-head"><span class="flag">🇱🇧</span><span class="c-name">Lebanon</span><span class="badge b-threat">Hezbollah factor</span></div>
+  <p>Lebanon's government is weak and heavily influenced by Hezbollah (Iran's proxy). Expect them to block or water down any language against Iran. Treat them like a softer version of Iran — use the same respectful but firm framing.</p>
+  <div class="rebuttal">"Lebanon's people — not its factions — deserve a stable Gulf that keeps energy prices manageable. Japan's proposal protects Lebanese civilians as much as anyone."</div>
+</div>
+</div>
+
+<!-- REBUTTAL TOOLKIT -->
+<div id="rebuttal" class="tab">
+<h2>⚔️ Rebuttal Toolkit — Any Attack, Any Delegate</h2>
+
+<div class="card">
+  <h3>"Japan is just following America's lead"</h3>
+  <div class="rebuttal">"Japan deployed its own Maritime Self-Defense Force mission — NOT under US command, NOT in the US-led Operation Sentinel. Japan maintained diplomatic relations with Iran when Washington was imposing maximum pressure. If anything, Japan has been a moderating influence on Western policy. We speak for Japan, not for Washington."</div>
+</div>
+
+<div class="card">
+  <h3>"Your monitoring proposal is a pretext for military action"</h3>
+  <div class="rebuttal">"Japan's constitution — Article 9 — prohibits offensive military action. Japan cannot legally launch or join a military strike. Our proposal is structurally incapable of being a military pretext because Japan cannot be party to one. The monitoring mission we propose is civilian, neutral, and UNSC-authorized — not American, not NATO, not Japanese."</div>
+</div>
+
+<div class="card">
+  <h3>"JCPOA failed — diplomacy doesn't work with Iran"</h3>
+  <div class="rebuttal">"The JCPOA didn't fail — it was abandoned. The IAEA certified Iranian compliance for three consecutive years. The framework collapsed when the United States unilaterally withdrew in 2018 and Europe failed to deliver promised sanctions relief. We don't condemn diplomacy because one party walked away from the table. We return to the table."</div>
+</div>
+
+<div class="card">
+  <h3>"Iran has the right to control its waters"</h3>
+  <div class="rebuttal">"Iran has sovereignty over its territorial waters — Japan fully respects that. But the Strait of Hormuz is an international strait under UNCLOS Article 37, to which Iran is a signatory. Transit passage through international straits is a right of ALL vessels under customary international law. Iran's sovereignty ends where international law begins — as it does for every state in this room, including Japan."</div>
+</div>
+
+<div class="card">
+  <h3>"This resolution serves rich countries — what about the Global South?"</h3>
+  <div class="rebuttal">"The countries that suffer most from a Hormuz closure are not Japan or the USA — they are Pakistan, India, Sri Lanka, and East African nations who have no strategic petroleum reserves, no alternate suppliers, and no buffer against price shocks. Japan's energy security protocol explicitly includes IEA emergency reserve sharing — which would be extended to non-IEA nations in a crisis. This resolution protects the world's poor more than anyone."</div>
+</div>
+
+<div class="card">
+  <h3>"The UK/USA are trying to re-colonize the Gulf"</h3>
+  <div class="rebuttal">"Japan has no colonial history in the Persian Gulf. We have never stationed forces there under occupation, never drawn arbitrary borders, never extracted resources by force. Japan comes to this table with clean hands and a genuine interest — the same LNG tanker that supplies Tokyo passes the same waters that supply Karachi and Mumbai. We are not here to dominate. We are here because we depend."</div>
+</div>
+
+<div class="card">
+  <h3>"Why should we trust Japan as a mediator?"</h3>
+  <div class="rebuttal">"Because Japan has earned it. In 2019, our tanker was attacked and our Prime Minister still flew to Tehran. We maintained our LNG contracts with Iran while the world sanctioned them. We deployed ships for monitoring without joining a military coalition. We have relationships in Riyadh, Tehran, Washington, and Beijing simultaneously. No other country in this room can say the same. That is exactly what a mediator needs."</div>
+</div>
+</div>
+
+<!-- WIN PLAN -->
+<div id="winplan" class="tab">
+<h2>🏆 Step-by-step Win Plan</h2>
+
+<div class="card" style="border-left:3px solid #185FA5;border-radius:0 var(--border-radius-lg) var(--border-radius-lg) 0">
+  <div class="label-sm">Phase 1 — Opening (GSL + Mod 1)</div>
+  <h3>Lock in your identity early</h3>
+  <ul>
+    <li>In your GSL speech, say Japan's three pillars clearly. Plant the flag before anyone else frames the debate.</li>
+    <li>Immediately approach South Korea and India in the first unmod — even a 30-second hallway conversation: "We're drafting together, right?"</li>
+    <li>In Mod 1, focus on LEGAL framing — UNCLOS, international law. This is uncontroversial enough to get Germany, France, UK, and Gulf states nodding early.</li>
+    <li>Do NOT engage Iran or Russia aggressively in Mod 1. You want to appear reasonable and buildable — not confrontational.</li>
+  </ul>
+</div>
+
+<div class="card" style="border-left:3px solid #1D9E75;border-radius:0 var(--border-radius-lg) var(--border-radius-lg) 0">
+  <div class="label-sm">Phase 2 — Mid debate (Mod 2 + Unmod 1)</div>
+  <h3>Build your working paper bloc</h3>
+  <ul>
+    <li>Raise your motion for unmod around Mod 2. Have a draft working paper ready on paper — even a rough outline.</li>
+    <li>Co-sponsor targets in order: South Korea → India → Germany → France → Qatar → Oman. That's 7 co-sponsors before you even talk to the GCC states.</li>
+    <li>Private pitch to China: "Co-sponsor the diplomatic section only — you get credit for the JCPOA clause, we get the monitoring clause. Split the win."</li>
+    <li>To Saudi Arabia + UAE: offer the clause condemning specific Iranian tanker seizures in exchange for their signatures.</li>
+    <li>To USA/UK: "We'll add language condemning Iranian nuclear escalation if you remove the military authorization clause."</li>
+  </ul>
+</div>
+
+<div class="card" style="border-left:3px solid #EF9F27;border-radius:0 var(--border-radius-lg) var(--border-radius-lg) 0">
+  <div class="label-sm">Phase 3 — Late debate (Mod 3 + Unmod 2)</div>
+  <h3>Merge and isolate</h3>
+  <ul>
+    <li>If a competing paper exists (likely from USA or Russia/Iran bloc), propose a merger. You're stronger negotiating from a 7-nation co-sponsor position.</li>
+    <li>Isolate the Iran-Russia-Syria bloc by making your paper so balanced that vetoing it looks purely obstructionist. Any delegate who vetoes a paper that includes JCPOA revival, respects Iranian sovereignty, and has no military mandate — looks unreasonable.</li>
+    <li>Use Mod 3 to present your full architecture proposal — this is your "closer." Make the resolution feel like a complete solution, not a partial measure.</li>
+    <li>If Russia signals a veto, find ONE concession to make — likely: add a preambular clause calling on ALL nations to refrain from unilateral coercive measures (code for: US sanctions). Russia often accepts symbolic wins.</li>
+  </ul>
+</div>
+
+<div class="card" style="border-left:3px solid #E24B4A;border-radius:0 var(--border-radius-lg) var(--border-radius-lg) 0">
+  <div class="label-sm">Endgame — Voting</div>
+  <h3>Control the vote count</h3>
+  <ul>
+    <li>Minimum viable coalition: Japan + S. Korea + India + Germany + France + UK + Qatar + Oman + Kuwait = 9 votes. That's enough IF no P5 veto.</li>
+    <li>China is your biggest diplomatic challenge — they can veto AND they're persuadable. Spend the most unmod time on China.</li>
+    <li>If Russia vetoes anyway — that's actually a win for Japan diplomatically. You passed 9+ votes, Russia isolated itself. In real MUN scoring, that demonstrates leadership even without a formal pass.</li>
+    <li>Never let USA push military language — that's the one thing that triggers both Russia AND China vetoes simultaneously and kills your coalition.</li>
+  </ul>
+</div>
+
+<div class="card">
+  <div class="label-sm">Japan's ultimate power move</div>
+  <p style="font-size:14px;color:var(--color-text-primary);font-weight:500;margin-bottom:.4rem">You are the only country in the room that everyone trusts</p>
+  <p>Iran trusts you — you talked to them when no one else did. The US trusts you — you're a treaty ally. China trusts you — you're not threatening military action. The Gulf states trust you — you buy their oil. India and South Korea trust you — you share their vulnerability. Use this in every speech, every unmod, every POI. Japan's power is not military. It's credibility. And in a diplomatic crisis, credibility wins.</p>
+</div>
+</div>
+
+</div>
+
+<script>
+function show(id){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>

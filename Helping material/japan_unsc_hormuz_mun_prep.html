@@ -1,0 +1,419 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans);background:transparent}
+.nav{display:flex;flex-wrap:wrap;gap:6px;padding:1rem 0 1.25rem;border-bottom:0.5px solid var(--color-border-tertiary);margin-bottom:1.5rem}
+.nav button{font-size:13px;padding:6px 14px;border-radius:20px;border:0.5px solid var(--color-border-secondary);background:var(--color-background-secondary);color:var(--color-text-secondary);cursor:pointer;transition:all .15s}
+.nav button.active{background:#185FA5;color:#E6F1FB;border-color:#185FA5;font-weight:500}
+.nav button:hover:not(.active){background:var(--color-background-tertiary);color:var(--color-text-primary)}
+.tab{display:none}.tab.active{display:block}
+h2{font-size:18px;font-weight:500;color:var(--color-text-primary);margin-bottom:1rem}
+h3{font-size:15px;font-weight:500;color:var(--color-text-primary);margin:1.25rem 0 .5rem}
+p,li{font-size:14px;color:var(--color-text-secondary);line-height:1.7}
+.card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1rem 1.25rem;margin-bottom:1rem}
+.speech-box{background:var(--color-background-secondary);border-left:3px solid #185FA5;border-radius:0 var(--border-radius-md) var(--border-radius-md) 0;padding:1rem 1.25rem;margin:1rem 0;font-size:14px;color:var(--color-text-primary);line-height:1.85;font-style:italic}
+.badge{display:inline-block;font-size:11px;padding:3px 10px;border-radius:12px;font-weight:500;margin-right:6px;margin-bottom:4px}
+.badge-blue{background:#E6F1FB;color:#0C447C}
+.badge-red{background:#FCEBEB;color:#791F1F}
+.badge-green{background:#EAF3DE;color:#27500A}
+.badge-amber{background:#FAEEDA;color:#633806}
+.badge-gray{background:#F1EFE8;color:#444441}
+.stat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin:1rem 0}
+.stat{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:.75rem 1rem}
+.stat .label{font-size:11px;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px}
+.stat .value{font-size:18px;font-weight:500;color:var(--color-text-primary)}
+.strategy-card{border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1rem 1.25rem;margin-bottom:1rem;background:var(--color-background-primary)}
+.strategy-card .s-title{font-size:14px;font-weight:500;color:var(--color-text-primary);margin-bottom:.5rem;display:flex;align-items:center;gap:8px}
+.tag-row{display:flex;flex-wrap:wrap;gap:6px;margin:.5rem 0}
+.divider{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:1.25rem 0}
+ul{padding-left:1.2rem}
+ul li{margin-bottom:.35rem}
+.ally-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:.75rem 0}
+.ally{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:.6rem .9rem;font-size:13px;color:var(--color-text-primary)}
+.block-title{font-size:12px;font-weight:500;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.5rem}
+</style>
+
+<div style="padding:1rem 0 0">
+
+<div style="display:flex;align-items:center;gap:12px;margin-bottom:1.25rem">
+  <div style="width:40px;height:40px;border-radius:50%;background:#FCEBEB;display:flex;align-items:center;justify-content:center;font-size:20px;border:0.5px solid var(--color-border-tertiary)">🇯🇵</div>
+  <div>
+    <p style="font-size:16px;font-weight:500;color:var(--color-text-primary);margin:0">Japan — UNSC Delegate</p>
+    <p style="font-size:13px;color:var(--color-text-secondary);margin:0">Agenda: The Issue of the Strait of Hormuz</p>
+  </div>
+  <div style="margin-left:auto"><span class="badge badge-red">UNSC</span><span class="badge badge-blue">P5+10</span></div>
+</div>
+
+<div class="nav">
+  <button class="active" onclick="show('kb')">🗂 Knowledge Bank</button>
+  <button onclick="show('gsl')">🎙 Opening Speech</button>
+  <button onclick="show('mod1')">📋 Mod 1</button>
+  <button onclick="show('mod2')">📋 Mod 2</button>
+  <button onclick="show('mod3')">📋 Mod 3</button>
+  <button onclick="show('unmod')">🤝 Unmod Strategy</button>
+  <button onclick="show('pois')">⚡ Points & POIs</button>
+</div>
+
+<!-- KNOWLEDGE BANK -->
+<div id="kb" class="tab active">
+<h2>Knowledge Bank — Japan on the Strait of Hormuz</h2>
+
+<div class="stat-row">
+  <div class="stat"><div class="label">Oil via Hormuz</div><div class="value">~90%</div></div>
+  <div class="stat"><div class="label">Daily LNG imports</div><div class="value">#1 world</div></div>
+  <div class="stat"><div class="label">GDP dependence</div><div class="value">critical</div></div>
+  <div class="stat"><div class="label">UNSC seat</div><div class="value">Elected</div></div>
+</div>
+
+<div class="card">
+  <div class="block-title">Why Japan cares — existential stakes</div>
+  <ul>
+    <li>Japan imports approximately <strong>90% of its crude oil</strong> through the Strait of Hormuz — any closure or disruption directly threatens its industrial economy.</li>
+    <li>Japan is the world's largest LNG importer; Qatar and the UAE supply a huge chunk via Hormuz.</li>
+    <li>The 2019 tanker attacks near Hormuz (including on a Japanese-operated vessel, <em>Kokuka Courageous</em>) made Japan directly aggrieved.</li>
+    <li>Japan has dispatched MSDF (Maritime Self-Defense Force) vessels to the region for intelligence gathering since 2020.</li>
+    <li>Economic disruption from a Hormuz closure is estimated to cost Japan tens of billions per month — equivalent to shutting down major industries.</li>
+  </ul>
+</div>
+
+<div class="card">
+  <div class="block-title">Japan's foreign policy DNA</div>
+  <ul>
+    <li><strong>Pacifist constitution (Article 9)</strong> — Japan cannot engage in offensive military action; it must frame all engagement as "peace-keeping" or "diplomacy-first."</li>
+    <li>Japan maintains a historically unique dual relationship with both the US and Iran — it was the only major US ally that did NOT immediately end oil imports from Iran after US sanctions in 2018 (it got a waiver).</li>
+    <li>PM Abe visited Tehran in 2019 as a mediator — Japan positioned itself as a neutral peace broker between Iran and the West.</li>
+    <li>Japan strongly supports UNCLOS (UN Convention on the Law of the Sea) — freedom of navigation is a core legal pillar.</li>
+    <li>Japan co-leads with the EU on multilateral dialogue — prefers the JCPOA revival framework over military escalation.</li>
+  </ul>
+</div>
+
+<div class="card">
+  <div class="block-title">Key facts about the Strait of Hormuz</div>
+  <ul>
+    <li>Only 33 km wide at its narrowest point; 2 shipping lanes each just 3.2 km wide.</li>
+    <li>Roughly 20–21 million barrels of oil per day pass through (~21% of global petroleum trade).</li>
+    <li>Iran has repeatedly threatened to close the strait in response to sanctions or military action.</li>
+    <li>Key actors: Iran (northern shore), Oman (southern shore), UAE, US Navy (5th Fleet in Bahrain).</li>
+    <li>Tensions flashpoints: drone attacks, tanker seizures, IRGC naval provocations, Houthi spillover from Yemen.</li>
+    <li>Operation Sentinel / IMSC (International Maritime Security Construct) — US-led coalition Japan did NOT join (to preserve Iran relations); instead Japan formed its own independent surveillance mission.</li>
+  </ul>
+</div>
+
+<div class="card">
+  <div class="block-title">Japan's position on key issues</div>
+  <ul>
+    <li><strong>On Iran sanctions:</strong> Supports targeted sanctions via UNSC, opposes unilateral US sanctions that destabilize diplomacy.</li>
+    <li><strong>On JCPOA:</strong> Strongly favors revival; nuclear deal reduces the core driver of tension.</li>
+    <li><strong>On militarization:</strong> Opposes any military escalation; supports diplomatic back-channels.</li>
+    <li><strong>On freedom of navigation:</strong> Absolute supporter — cites UNCLOS Article 38 (transit passage rights).</li>
+    <li><strong>On multilateralism:</strong> Prefers any solution to go through UNSC or IAEA, not unilateral action.</li>
+  </ul>
+</div>
+
+<div class="card">
+  <div class="block-title">Allies & adversaries in this committee</div>
+  <div class="ally-row">
+    <div class="ally">🇺🇸 <strong>USA</strong> — Ally on security but tension on sanctions approach</div>
+    <div class="ally">🇬🇧 <strong>UK / France</strong> — Align on JCPOA revival; close partners</div>
+    <div class="ally">🇦🇪 <strong>UAE / Oman</strong> — Shared economic interest in open strait</div>
+    <div class="ally">🇨🇳 <strong>China</strong> — Align on non-militarization; both energy importers</div>
+    <div class="ally">🇮🇳 <strong>India</strong> — Similar dependency; natural ally on trade corridor protection</div>
+    <div class="ally">🇮🇷 <strong>Iran</strong> — Complicated; Japan played mediator role, treat respectfully</div>
+  </div>
+  <p style="margin-top:.5rem;font-size:13px;color:var(--color-text-tertiary)">Tip: Build a bloc with India, South Korea (if present), EU members — all share the "energy-dependent, diplomacy-first" identity.</p>
+</div>
+
+<div class="card">
+  <div class="block-title">Japan's historical talking points</div>
+  <ul>
+    <li>2019: Tanker attacks — Japan's FM Kono condemned them, but PM Abe still flew to Tehran for dialogue.</li>
+    <li>2020: Japan deployed MSDF destroyer <em>JS Takanami</em> + P-3C patrol aircraft for independent intelligence gathering — NOT under US command.</li>
+    <li>Japan-Iran oil history: Tokyo was Tehran's top oil customer for decades before US sanctions.</li>
+    <li>Japan-Saudi Arabia: Vision 2030 partnerships, $1B+ investments — Japan must maintain GCC trust too.</li>
+    <li>Japan supports the IAEA's monitoring role inside Iran as a verification mechanism.</li>
+  </ul>
+</div>
+</div>
+
+<!-- OPENING SPEECH (GSL) -->
+<div id="gsl" class="tab">
+<h2>Opening Speech — General Speakers List (90 sec)</h2>
+<div class="card" style="margin-bottom:.75rem">
+  <div class="block-title">Tone & strategy</div>
+  <div class="tag-row">
+    <span class="badge badge-blue">Diplomatic</span>
+    <span class="badge badge-green">Multilateral</span>
+    <span class="badge badge-amber">Energy-Security framing</span>
+    <span class="badge badge-gray">Non-confrontational</span>
+  </div>
+  <p style="margin-top:.5rem">Establish Japan as: (1) the most economically affected non-party, (2) a credible peace broker with Iran AND the West, (3) champion of UNCLOS and maritime law. Set up your resolution pillars early.</p>
+</div>
+
+<div class="speech-box">
+"Honorable Chair, distinguished delegates,<br><br>
+The Strait of Hormuz is not merely a waterway. It is the lifeline of the global economy — and for Japan, it is existential. Nearly ninety percent of Japan's crude oil, and the vast majority of our liquefied natural gas, passes through those thirty-three kilometers of water every single day. When this strait is threatened, Japan does not merely observe — Japan suffers.<br><br>
+Japan has experienced this reality firsthand. In June 2019, a Japanese-operated tanker was struck in the Gulf of Oman. Yet even in that moment, Japan's response was not military — it was diplomatic. Prime Minister Abe flew to Tehran not with ultimatums, but with dialogue. Because Japan understands what this Council must also understand: there is no military solution to the Strait of Hormuz crisis. There is only a diplomatic one.<br><br>
+Japan calls upon this Council to pursue three pillars: first, the unconditional protection of freedom of navigation under UNCLOS; second, the revival of multilateral diplomatic frameworks including the JCPOA; and third, the establishment of a permanent UNSC maritime monitoring mechanism for the Persian Gulf region.<br><br>
+Japan stands ready to work with all delegations — east and west, north and south — to ensure that the Strait of Hormuz remains open, lawful, and peaceful. The world cannot afford otherwise. Japan will not allow otherwise.<br><br>
+Thank you, Honorable Chair."
+</div>
+
+<div class="card">
+  <div class="block-title">Keywords to use</div>
+  <div class="tag-row">
+    <span class="badge badge-blue">"Freedom of navigation"</span>
+    <span class="badge badge-blue">"UNCLOS Article 38"</span>
+    <span class="badge badge-green">"Diplomatic channels"</span>
+    <span class="badge badge-amber">"Energy security"</span>
+    <span class="badge badge-gray">"Multilateral framework"</span>
+    <span class="badge badge-red">"De-escalation"</span>
+  </div>
+</div>
+</div>
+
+<!-- MOD 1 -->
+<div id="mod1" class="tab">
+<h2>Moderated Caucus 1 — Freedom of Navigation & Legal Framework</h2>
+<div class="card">
+  <div class="block-title">Suggested motion to raise</div>
+  <p><em>"Japan moves for a moderated caucus of 8 minutes, with 60 seconds per speaker, on the topic: Legal frameworks for protecting freedom of navigation in the Strait of Hormuz."</em></p>
+</div>
+
+<div class="card">
+  <div class="block-title">Your 60-second speech</div>
+</div>
+<div class="speech-box">
+"Honorable Chair,<br><br>
+Under Article 38 of UNCLOS, all ships — commercial, civilian, military — enjoy the right of transit passage through international straits. This is not a privilege. It is international law.<br><br>
+Iran's repeated threats to close the Strait, and the pattern of tanker seizures by the IRGC — most recently in 2023 — constitute direct violations of these legal norms. Japan, as the single most economically dependent nation on this waterway, urges this Council to reaffirm UNCLOS as the binding framework.<br><br>
+We propose the Council pass a resolution explicitly invoking Chapter VI of the UN Charter, calling on all parties to respect transit passage rights, and establishing a UNSC-mandated maritime observation mission — independent of any single nation's command — to monitor compliance in real time.<br><br>
+Japan is not seeking confrontation with any state. Japan is seeking the rule of law. Because when the law fails in the Strait of Hormuz, every nation in this room pays the price at the pump, at the factory, and at the dinner table.<br><br>
+Thank you."
+</div>
+
+<div class="card">
+  <div class="block-title">Key arguments to build on in debate</div>
+  <ul>
+    <li>UNCLOS has 168 state parties — it is arguably the most universally ratified treaty in international law. Iran IS a signatory.</li>
+    <li>Transit passage rights (UNCLOS Art. 38–39) cannot be suspended even in wartime under customary international law.</li>
+    <li>UNSC Resolution 598 (Iran-Iraq war) already set precedent for UNSC intervention in Gulf maritime security.</li>
+    <li>Japan's independent MSDF deployment demonstrates that non-confrontational maritime presence is possible and legal.</li>
+    <li>A UNSC monitoring body is different from a military coalition — it has legitimacy, neutrality, and legal authority.</li>
+  </ul>
+</div>
+
+<div class="card">
+  <div class="block-title">Counter arguments & rebuttals</div>
+  <ul>
+    <li><strong>If Iran/Russia says "Western interference":</strong> "Japan's proposal is through the UNSC — the most legitimate multilateral body. Japan itself chose NOT to join the US-led Operation Sentinel. This is precisely to ensure neutrality."</li>
+    <li><strong>If someone says UNCLOS doesn't apply to military vessels:</strong> "Articles 38-40 apply to ALL ships including warships in international straits — this is settled law."</li>
+    <li><strong>If USA pushes for military enforcement:</strong> "Japan urges restraint. Unilateral military action risks the very destabilization we seek to prevent."</li>
+  </ul>
+</div>
+</div>
+
+<!-- MOD 2 -->
+<div id="mod2" class="tab">
+<h2>Moderated Caucus 2 — Iran, Sanctions & Diplomatic De-escalation</h2>
+<div class="card">
+  <div class="block-title">Suggested motion to raise</div>
+  <p><em>"Japan moves for a moderated caucus of 10 minutes, with 75 seconds per speaker, on the topic: Diplomatic pathways and the role of sanctions in resolving tensions in the Strait of Hormuz."</em></p>
+</div>
+
+<div class="card">
+  <div class="block-title">Your 75-second speech</div>
+</div>
+<div class="speech-box">
+"Honorable Chair,<br><br>
+Sanctions without diplomacy are a weapon without a target. Japan has seen this repeatedly in the Persian Gulf context.<br><br>
+The 2015 JCPOA demonstrated that multilateral diplomatic engagement CAN constrain Iran's nuclear program. Its collapse in 2018 — not through Iranian violation, but through unilateral US withdrawal — directly contributed to the escalation we now debate. Japan never abandoned its diplomatic relationship with Tehran precisely because we understood that coercion alone would not work.<br><br>
+Japan proposes that this Council formally endorse the resumption of JCPOA negotiations, tie any further sanctions to specific, verifiable Iranian actions — not geopolitical pressure — and establish a UN Special Envoy for Persian Gulf Security Dialogue, modeled on successful precedents in the Korean Peninsula and Afghanistan.<br><br>
+Japan has served as an intermediary between Iran and the international community. We are willing to host or co-host such dialogue. We call on Iran to return to the table, and we call on all P5 members to prioritize a negotiated solution over military posturing.<br><br>
+The Strait of Hormuz will only be truly secure when Iran feels secure. That requires engagement — not encirclement.<br><br>
+Thank you, Chair."
+</div>
+
+<div class="card">
+  <div class="block-title">Key arguments to build on</div>
+  <ul>
+    <li>Iran's motivation to threaten Hormuz is directly tied to sanctions pressure and security fears — address the cause, not just the symptom.</li>
+    <li>Japan's unique position: only major US ally that maintained dialogue with Iran post-2018 sanctions. This gives Japan credibility with BOTH sides.</li>
+    <li>JCPOA: Iran was verified compliant by the IAEA for years before the US withdrew. Revival is possible.</li>
+    <li>UN Special Envoy model: successful in Yemen ceasefire talks — same structure could work for Gulf security.</li>
+    <li>Multilateral sanctions (UNSC-authorized) are more effective and more legitimate than unilateral sanctions — make this distinction clearly.</li>
+  </ul>
+</div>
+
+<div class="card">
+  <div class="block-title">Counter arguments & rebuttals</div>
+  <ul>
+    <li><strong>If USA/UK says Iran violated JCPOA:</strong> "Iran's violations began AFTER the US withdrawal in 2018 and AFTER Europe failed to provide promised sanctions relief. The sequence matters for accountability."</li>
+    <li><strong>If hardliners say diplomacy failed:</strong> "Diplomacy was abandoned, not failed. The IAEA verified Iranian compliance for years. We owe it to global stability to try again."</li>
+    <li><strong>If China/Russia vetoes security measures:</strong> Find common ground — both China and Russia support JCPOA revival. Build a bloc here.</li>
+  </ul>
+</div>
+</div>
+
+<!-- MOD 3 -->
+<div id="mod3" class="tab">
+<h2>Moderated Caucus 3 — Long-term Maritime Security Architecture</h2>
+<div class="card">
+  <div class="block-title">Suggested motion to raise</div>
+  <p><em>"Japan moves for a moderated caucus of 12 minutes, with 90 seconds per speaker, on the topic: Building a permanent multilateral maritime security architecture for the Persian Gulf."</em></p>
+</div>
+
+<div class="card">
+  <div class="block-title">Your 90-second speech</div>
+</div>
+<div class="speech-box">
+"Honorable Chair,<br><br>
+This Council has reacted to crises in the Strait of Hormuz for decades. It is time we stopped reacting and started building.<br><br>
+Japan proposes the creation of a Persian Gulf Maritime Safety and Cooperation Framework — a permanent, UNSC-mandated institution with four components:<br><br>
+First, a Joint Maritime Incident Room, co-staffed by regional and international observers, to provide real-time transparency and prevent miscalculation from escalating into conflict — similar to the Communication and Coordination Agreement already operating between Israel and Russia in Syrian airspace.<br><br>
+Second, an independent UN Maritime Monitor deployed in the strait to document compliance with UNCLOS, neutrally — not under any single great power's command.<br><br>
+Third, an Emergency Economic Stabilization Protocol — pre-agreed mechanisms for releasing strategic petroleum reserves coordinated by the IEA — so that any temporary disruption does not cause global economic panic. Japan, the US, and IEA members already coordinate on this; we propose formalizing it under UN auspices.<br><br>
+Fourth, a Confidence-Building Measures program between Iran and GCC states, facilitated by a neutral party — Japan offers itself for this role — modeled on the CSCE mechanisms that reduced Cold War tensions in Europe.<br><br>
+We cannot solve Hormuz with resolutions alone. We need architecture. Japan is ready to build it.<br><br>
+Thank you, Chair."
+</div>
+
+<div class="card">
+  <div class="block-title">Resolution clause ideas (for your draft)</div>
+  <ul>
+    <li><strong>PP clause:</strong> "Recalling UNSC Resolution 598 (1987) and its precedent for Council authority over Gulf maritime security,"</li>
+    <li><strong>PP clause:</strong> "Deeply concerned by the pattern of tanker seizures and navigational harassment in the Strait of Hormuz since 2019,"</li>
+    <li><strong>OP 1:</strong> "Reaffirms the right of transit passage under UNCLOS Article 38 as inviolable international law;"</li>
+    <li><strong>OP 2:</strong> "Calls upon all parties to refrain from any action that threatens, harasses, or impedes commercial navigation in the Strait of Hormuz;"</li>
+    <li><strong>OP 3:</strong> "Establishes a UN Persian Gulf Maritime Monitoring Mission (UNPMM) with a mandate of 18 months, to be reviewed by the Council;"</li>
+    <li><strong>OP 4:</strong> "Urges the resumption of multilateral diplomatic negotiations on Iran's nuclear program under IAEA verification;"</li>
+    <li><strong>OP 5:</strong> "Encourages member states to activate IEA emergency petroleum reserve protocols in the event of navigational disruption;"</li>
+  </ul>
+</div>
+</div>
+
+<!-- UNMOD STRATEGY -->
+<div id="unmod" class="tab">
+<h2>Unmoderated Caucus — Diplomacy on the Floor</h2>
+
+<div class="card">
+  <div class="block-title">How to move for unmod</div>
+  <p><em>"Japan moves for an unmoderated caucus of 15 minutes for the purpose of working paper drafting and bloc formation."</em></p>
+  <p style="margin-top:.5rem;font-size:13px;color:var(--color-text-tertiary)">Move unmod when: you have a draft ready to show; you need to flip a swing vote; you want to merge two competing papers; or when debate is going in circles and you need to reset.</p>
+</div>
+
+<div class="strategy-card">
+  <div class="s-title"><span style="font-size:18px">🤝</span> Priority target: The Energy-Dependent Bloc</div>
+  <p>Approach India, South Korea, Singapore, Germany, France with this opener:</p>
+  <div class="speech-box" style="margin:.75rem 0">"Japan and [country] share the same vulnerability — we both depend on Hormuz for our economies. Let's draft language that protects our shared interest without triggering a veto from China or Russia."</div>
+  <div class="tag-row"><span class="badge badge-blue">India</span><span class="badge badge-blue">S. Korea</span><span class="badge badge-blue">Germany</span><span class="badge badge-blue">France</span><span class="badge badge-blue">Singapore</span></div>
+</div>
+
+<div class="strategy-card">
+  <div class="s-title"><span style="font-size:18px">🌐</span> Managing the P5 divide</div>
+  <ul>
+    <li><strong>USA/UK:</strong> "Japan supports security, but any UNSC mechanism must be neutral. We'll back stronger language on Iranian compliance IF you accept a UN monitoring body instead of a US-led coalition."</li>
+    <li><strong>China/Russia:</strong> "Japan is NOT proposing military action. Our proposal is diplomatic and monitoring-based. Both your nations benefit from open energy shipping too. Let's work together on the de-escalation clauses."</li>
+    <li><strong>France:</strong> Natural ally — both support JCPOA, both are non-military approach advocates. Merge drafts early.</li>
+  </ul>
+</div>
+
+<div class="strategy-card">
+  <div class="s-title"><span style="font-size:18px">🇮🇷</span> Approaching the Iran delegation (if present)</div>
+  <div class="speech-box" style="margin:.75rem 0">"Japan has never treated Iran as an adversary. We maintained diplomatic relations when others did not. Our proposal does not target Iran — it protects a global commons. Japan would welcome Iran's input on the monitoring mechanism's mandate to ensure it respects Iranian sovereignty."</div>
+  <p>Offer Iran a face-saving clause: monitoring is of ALL vessels, not just Iranian military — parity framing.</p>
+</div>
+
+<div class="strategy-card">
+  <div class="s-title"><span style="font-size:18px">📄</span> Working paper structure (propose this)</div>
+  <ul>
+    <li>Section A: Reaffirmation of UNCLOS (easy consensus, everyone signs)</li>
+    <li>Section B: Diplomatic pathway — JCPOA, UN Special Envoy (China/Russia win here)</li>
+    <li>Section C: Maritime Monitoring Mission (your flagship — link to Section A for legal grounding)</li>
+    <li>Section D: Economic Stabilization Protocol — IEA coordination (keep it soft, non-binding to get more signatories)</li>
+  </ul>
+</div>
+
+<div class="strategy-card">
+  <div class="s-title"><span style="font-size:18px">⚡</span> Power move: Merge before voting</div>
+  <p>If another bloc has a competing paper, propose a merger. In UNSC, you only need 9 votes and no P5 veto. A merged paper with US + China + Japan as co-sponsors is almost unvetable. Sacrifice minor clauses to get the big ones through.</p>
+</div>
+</div>
+
+<!-- POINTS & POIs -->
+<div id="pois" class="tab">
+<h2>Points, POIs & Rapid-Fire Arguments</h2>
+
+<div class="card">
+  <div class="block-title">Points of information (POIs) to raise</div>
+  <ul>
+    <li>"Will the delegate specify whether their proposed security mechanism would operate under UNSC authority or unilateral national command?"</li>
+    <li>"Can the delegate clarify whether their resolution language is consistent with Iran's obligations under UNCLOS, to which it is a signatory?"</li>
+    <li>"Does the delegate's proposal account for the economic impact on energy-importing nations in the Global South, who bear disproportionate cost from disruption?"</li>
+    <li>"Would the delegate support a UN Special Envoy mechanism, given its success in similar regional security contexts?"</li>
+  </ul>
+</div>
+
+<div class="card">
+  <div class="block-title">One-line knockout arguments</div>
+  <ul>
+    <li>"Japan was attacked — our tanker was hit — and still we chose the negotiating table over the warroom. That is not weakness. That is wisdom."</li>
+    <li>"Ninety percent of Japan's energy passes through Hormuz. If any delegation doubts our commitment to this issue, they should consider: Japan has the most to lose and the most to offer as a neutral broker."</li>
+    <li>"A military coalition without UN authority is not security — it is escalation with better branding."</li>
+    <li>"UNCLOS is not optional for its signatories. Iran signed it. We must hold all parties to their treaty obligations — including ourselves."</li>
+    <li>"We cannot sanction our way to security. We tried that from 2018 to 2023. The result was more tanker seizures, not fewer."</li>
+  </ul>
+</div>
+
+<div class="card">
+  <div class="block-title">Right of reply triggers</div>
+  <ul>
+    <li>If any delegate implies Japan is a US puppet: "Japan deploys its own independent MSDF mission — NOT under US command — precisely to preserve its diplomatic independence. Japan speaks for Japan."</li>
+    <li>If anyone dismisses Japan as a "non-regional actor": "Japan is the world's largest LNG importer and a top-three oil importer. Our economic presence in this region exceeds that of many states on this Council."</li>
+  </ul>
+</div>
+
+<div class="card">
+  <div class="block-title">Key dates & facts to cite in debate</div>
+  <ul>
+    <li><strong>June 13, 2019:</strong> Japanese tanker <em>Kokuka Courageous</em> attacked in Gulf of Oman</li>
+    <li><strong>June 15, 2019:</strong> PM Abe visits Tehran — first Japanese PM in 41 years</li>
+    <li><strong>Jan 2020:</strong> Japan deploys MSDF destroyer for independent surveillance</li>
+    <li><strong>2015:</strong> JCPOA signed — Iran certified compliant by IAEA for 3+ years</li>
+    <li><strong>May 2018:</strong> US withdraws from JCPOA — tensions begin escalating again</li>
+    <li><strong>2023:</strong> Iran seizes Portuguese-flagged tanker; multiple IRGC naval incidents</li>
+    <li><strong>21M bbl/day</strong> transit Hormuz = ~21% of global oil trade</li>
+  </ul>
+</div>
+
+<div class="card">
+  <div class="block-title">Japan's three-pillar resolution summary (your elevator pitch)</div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-top:.75rem">
+    <div style="background:#E6F1FB;border-radius:var(--border-radius-md);padding:.75rem;text-align:center">
+      <div style="font-size:22px;margin-bottom:4px">⚖️</div>
+      <div style="font-size:13px;font-weight:500;color:#0C447C">Pillar 1</div>
+      <div style="font-size:12px;color:#185FA5;margin-top:2px">UNCLOS enforcement & legal reaffirmation</div>
+    </div>
+    <div style="background:#EAF3DE;border-radius:var(--border-radius-md);padding:.75rem;text-align:center">
+      <div style="font-size:22px;margin-bottom:4px">🕊️</div>
+      <div style="font-size:13px;font-weight:500;color:#27500A">Pillar 2</div>
+      <div style="font-size:12px;color:#3B6D11;margin-top:2px">JCPOA revival & UN Special Envoy for dialogue</div>
+    </div>
+    <div style="background:#FAEEDA;border-radius:var(--border-radius-md);padding:.75rem;text-align:center">
+      <div style="font-size:22px;margin-bottom:4px">🏛️</div>
+      <div style="font-size:13px;font-weight:500;color:#633806">Pillar 3</div>
+      <div style="font-size:12px;color:#854F0B;margin-top:2px">Permanent maritime monitoring framework under UNSC</div>
+    </div>
+  </div>
+</div>
+</div>
+
+</div>
+
+<script>
+function show(id){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>

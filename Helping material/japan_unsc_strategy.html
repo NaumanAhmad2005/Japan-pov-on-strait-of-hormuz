@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🇯🇵 Japan — UNSC Hormuz Strategy</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #080c14;
+  --surface: #0d1420;
+  --surface2: #121b2a;
+  --border: #1e2d45;
+  --border2: #243650;
+  --text: #e8edf5;
+  --text2: #8a9bb8;
+  --text3: #4a5c78;
+  --ally: #00c87a;
+  --ally-bg: #001f14;
+  --ally-border: #004d2e;
+  --swing: #f59e0b;
+  --swing-bg: #1f1000;
+  --swing-border: #5c3200;
+  --threat: #f04f4f;
+  --threat-bg: #1f0808;
+  --threat-border: #5c1515;
+  --accent: #3b82f6;
+  --accent-bg: #0a1628;
+  --japan: #bc002d;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+/* HEADER */
+.header {
+  background: linear-gradient(135deg, #0d1420 0%, #080c14 60%);
+  border-bottom: 1px solid var(--border);
+  padding: 1.5rem 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+}
+.header-flag {
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  background: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 26px;
+  box-shadow: 0 0 0 2px var(--japan), 0 0 24px rgba(188,0,45,0.3);
+  flex-shrink: 0;
+}
+.header-info h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: 20px; font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+.header-info p {
+  font-size: 12px; color: var(--text3);
+  font-family: 'IBM Plex Mono', monospace;
+  margin-top: 2px;
+}
+.header-badges { margin-left: auto; display: flex; gap: 8px; }
+.hbadge {
+  font-size: 10px; font-weight: 600;
+  padding: 4px 10px; border-radius: 20px;
+  font-family: 'IBM Plex Mono', monospace;
+  letter-spacing: .04em;
+}
+.hb-red { background: rgba(188,0,45,.15); color: var(--japan); border: 1px solid rgba(188,0,45,.3); }
+.hb-blue { background: rgba(59,130,246,.15); color: #60a5fa; border: 1px solid rgba(59,130,246,.3); }
+
+/* TABS */
+.tab-bar {
+  display: flex; gap: 0;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+  padding: 0 1rem;
+}
+.tab-bar::-webkit-scrollbar { height: 0; }
+.tbtn {
+  font-family: 'Syne', sans-serif;
+  font-size: 12px; font-weight: 600;
+  padding: 14px 18px;
+  border: none; background: none;
+  color: var(--text3);
+  cursor: pointer;
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  transition: all .2s;
+  letter-spacing: .02em;
+}
+.tbtn.active { color: var(--accent); border-bottom-color: var(--accent); background: rgba(59,130,246,.05); }
+.tbtn:hover:not(.active) { color: var(--text2); background: rgba(255,255,255,.03); }
+
+/* PANELS */
+.panel { display: none; padding: 2rem; max-width: 1100px; margin: 0 auto; }
+.panel.active { display: block; animation: fadeIn .2s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ROOM MAP */
+.map-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 10px;
+  margin-bottom: 1.5rem;
+}
+.ctile {
+  border-radius: 10px;
+  padding: 14px 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform .15s, box-shadow .15s;
+  border: 1px solid;
+  position: relative;
+  overflow: hidden;
+}
+.ctile::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,.03), transparent);
+}
+.ctile:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,.5); }
+.ctile .flag { font-size: 26px; display: block; margin-bottom: 6px; }
+.ctile .cname { font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 700; display: block; letter-spacing: .02em; }
+.ctile .crole { font-size: 10px; display: block; margin-top: 3px; font-family: 'IBM Plex Mono', monospace; opacity: .7; }
+
+.t-ally { background: var(--ally-bg); border-color: var(--ally-border); }
+.t-ally .cname { color: var(--ally); }
+.t-swing { background: var(--swing-bg); border-color: var(--swing-border); }
+.t-swing .cname { color: var(--swing); }
+.t-threat { background: var(--threat-bg); border-color: var(--threat-border); }
+.t-threat .cname { color: var(--threat); }
+.t-neutral { background: var(--surface2); border-color: var(--border); }
+.t-neutral .cname { color: var(--text2); }
+
+.legend { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 1.25rem; }
+.leg { display: flex; align-items: center; gap: 7px; font-size: 12px; color: var(--text2); }
+.ldot { width: 8px; height: 8px; border-radius: 50%; }
+
+/* CARDS */
+.section-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .1em;
+  color: var(--text3);
+  margin: 1.5rem 0 .75rem;
+}
+.section-title:first-child { margin-top: 0; }
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.1rem 1.25rem;
+  margin-bottom: .9rem;
+}
+.card.ally-card { border-left: 3px solid var(--ally); }
+.card.swing-card { border-left: 3px solid var(--swing); }
+.card.threat-card { border-left: 3px solid var(--threat); }
+.card.accent-card { border-left: 3px solid var(--accent); }
+
+.card-head { display: flex; align-items: center; gap: 10px; margin-bottom: .6rem; flex-wrap: wrap; }
+.card-flag { font-size: 22px; }
+.card-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 15px; font-weight: 700;
+  color: var(--text);
+}
+.cbadge {
+  font-size: 10px; padding: 3px 9px; border-radius: 10px;
+  font-weight: 600; font-family: 'IBM Plex Mono', monospace;
+  margin-left: auto;
+}
+.cb-ally { background: var(--ally-bg); color: var(--ally); border: 1px solid var(--ally-border); }
+.cb-swing { background: var(--swing-bg); color: var(--swing); border: 1px solid var(--swing-border); }
+.cb-threat { background: var(--threat-bg); color: var(--threat); border: 1px solid var(--threat-border); }
+.cb-neutral { background: var(--surface2); color: var(--text2); border: 1px solid var(--border); }
+
+.card-desc { font-size: 13px; color: var(--text2); line-height: 1.7; margin-bottom: .7rem; }
+.speech {
+  background: rgba(59,130,246,.06);
+  border-left: 2px solid var(--accent);
+  border-radius: 0 8px 8px 0;
+  padding: .8rem 1rem;
+  font-size: 13px; color: #93c5fd;
+  line-height: 1.75; font-style: italic;
+  margin: .6rem 0;
+}
+.tip {
+  background: rgba(0,200,122,.06);
+  border: 1px solid var(--ally-border);
+  border-radius: 8px;
+  padding: .6rem .9rem;
+  font-size: 12px; color: #6ee7b7;
+  margin-top: .6rem;
+}
+.tip strong { color: var(--ally); }
+
+/* REBUTTAL */
+.reb-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.1rem 1.25rem;
+  margin-bottom: .9rem;
+}
+.reb-attack {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px; font-weight: 500;
+  color: var(--threat);
+  margin-bottom: .7rem;
+  padding: .5rem .75rem;
+  background: var(--threat-bg);
+  border-radius: 6px;
+  border: 1px solid var(--threat-border);
+}
+.reb-attack::before { content: "⚡ ATTACK: "; opacity: .6; }
+
+/* VOTE MATH */
+.vote-section { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem; margin-bottom: 1rem; }
+.vote-number { font-family: 'Syne', sans-serif; font-size: 42px; font-weight: 800; }
+.vote-sub { font-size: 12px; font-family: 'IBM Plex Mono', monospace; color: var(--text3); margin-top: 2px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin: .75rem 0; }
+.chip { font-size: 12px; padding: 4px 10px; border-radius: 20px; font-weight: 500; }
+.chip-ally { background: var(--ally-bg); color: var(--ally); border: 1px solid var(--ally-border); }
+.chip-swing { background: var(--swing-bg); color: var(--swing); border: 1px solid var(--swing-border); }
+.chip-threat { background: var(--threat-bg); color: var(--threat); border: 1px solid var(--threat-border); }
+.pbar { height: 6px; background: var(--border); border-radius: 3px; margin: .75rem 0; overflow: hidden; }
+.pfill { height: 100%; border-radius: 3px; }
+.pfill-ally { background: linear-gradient(90deg, var(--ally), var(--accent)); }
+.pfill-swing { background: linear-gradient(90deg, var(--ally), var(--swing)); }
+.scenarios { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 1rem; }
+.scenario { border-radius: 10px; padding: .9rem; border: 1px solid; }
+.sc-best { background: var(--ally-bg); border-color: var(--ally-border); }
+.sc-best .sc-label { color: var(--ally); }
+.sc-worst { background: var(--threat-bg); border-color: var(--threat-border); }
+.sc-worst .sc-label { color: var(--threat); }
+.sc-label { font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 5px; }
+.sc-text { font-size: 12.5px; color: var(--text2); line-height: 1.6; }
+
+/* WIN PLAN */
+.phase {
+  border-radius: 12px;
+  padding: 1.25rem 1.35rem;
+  margin-bottom: 1rem;
+  border: 1px solid;
+  position: relative;
+  overflow: hidden;
+}
+.phase::after {
+  content: attr(data-num);
+  position: absolute;
+  right: -10px; top: -15px;
+  font-family: 'Syne', sans-serif;
+  font-size: 72px; font-weight: 800;
+  opacity: .04;
+  color: #fff;
+  pointer-events: none;
+}
+.ph1 { background: linear-gradient(135deg, #0a1628, #08101e); border-color: #1e3a5f; }
+.ph2 { background: linear-gradient(135deg, #001f14, #001208); border-color: var(--ally-border); }
+.ph3 { background: linear-gradient(135deg, #1f1000, #150a00); border-color: var(--swing-border); }
+.ph4 { background: linear-gradient(135deg, #1f0808, #130404); border-color: var(--threat-border); }
+.phase-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px; font-weight: 500;
+  text-transform: uppercase; letter-spacing: .1em;
+  margin-bottom: 5px;
+}
+.ph1 .phase-label { color: #60a5fa; }
+.ph2 .phase-label { color: var(--ally); }
+.ph3 .phase-label { color: var(--swing); }
+.ph4 .phase-label { color: var(--threat); }
+.phase h3 { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: .7rem; }
+.phase ul { padding-left: 1.1rem; }
+.phase li { font-size: 13px; color: var(--text2); line-height: 1.7; margin-bottom: 4px; }
+
+/* FINAL WEAPON CARD */
+.weapon-card {
+  background: linear-gradient(135deg, #0a0e1a, #0d1225);
+  border: 1px solid #1e3a5f;
+  border-radius: 14px;
+  padding: 1.5rem;
+  margin-top: 1.25rem;
+  position: relative;
+  overflow: hidden;
+}
+.weapon-card::before {
+  content: '⚔';
+  position: absolute; right: 1.5rem; top: 1rem;
+  font-size: 48px; opacity: .08;
+}
+.weapon-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: .12em;
+  color: #60a5fa;
+  margin-bottom: .5rem;
+}
+.weapon-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 15px; font-weight: 700;
+  color: var(--text);
+  margin-bottom: .6rem;
+}
+.weapon-text { font-size: 13.5px; color: var(--text2); line-height: 1.75; }
+.weapon-text strong { color: var(--text); }
+
+/* UTILITY */
+h2 { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; color: var(--text); margin-bottom: 1.25rem; letter-spacing: -.02em; }
+.stat-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-bottom: 1.25rem; }
+.stat-box { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1rem; text-align: center; }
+.stat-num { font-family: 'Syne', sans-serif; font-size: 28px; font-weight: 800; color: var(--accent); }
+.stat-lbl { font-size: 11px; color: var(--text3); font-family: 'IBM Plex Mono', monospace; text-transform: uppercase; letter-spacing: .06em; margin-top: 4px; }
+
+@media (max-width: 600px) {
+  .header { padding: 1rem; }
+  .panel { padding: 1.25rem 1rem; }
+  .header-badges { display: none; }
+  .map-grid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); }
+  .scenarios { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-flag">🇯🇵</div>
+  <div class="header-info">
+    <h1>Japan — UNSC Room Control</h1>
+    <p>STRAIT OF HORMUZ · 24-COUNTRY STRATEGY GUIDE</p>
+  </div>
+  <div class="header-badges">
+    <span class="hbadge hb-red">JAPAN</span>
+    <span class="hbadge hb-blue">UNSC 2026</span>
+  </div>
+</div>
+
+<div class="tab-bar">
+  <button class="tbtn active" onclick="show('map')">🗺 Room Map</button>
+  <button class="tbtn" onclick="show('allies')">🟢 Allies</button>
+  <button class="tbtn" onclick="show('swing')">🟡 Swing States</button>
+  <button class="tbtn" onclick="show('threats')">🔴 Threats</button>
+  <button class="tbtn" onclick="show('rebuttal')">⚔️ Rebuttals</button>
+  <button class="tbtn" onclick="show('votemath')">🗳 Vote Math</button>
+  <button class="tbtn" onclick="show('winplan')">🏆 Win Plan</button>
+</div>
+
+<!-- ROOM MAP -->
+<div id="map" class="panel active">
+  <h2>All 24 Countries at a Glance</h2>
+  <div class="legend">
+    <div class="leg"><div class="ldot" style="background:var(--ally)"></div>Natural Ally</div>
+    <div class="leg"><div class="ldot" style="background:var(--swing)"></div>Swing — Flip These</div>
+    <div class="leg"><div class="ldot" style="background:var(--threat)"></div>Threat / Oppose</div>
+    <div class="leg"><div class="ldot" style="background:var(--text3)"></div>Neutral / Manage</div>
+  </div>
+  <div class="map-grid">
+    <div class="ctile t-ally" onclick="show('allies')"><span class="flag">🇰🇷</span><span class="cname">S. Korea</span><span class="crole">Priority #1</span></div>
+    <div class="ctile t-ally" onclick="show('allies')"><span class="flag">🇮🇳</span><span class="cname">India</span><span class="crole">Energy bloc</span></div>
+    <div class="ctile t-ally" onclick="show('allies')"><span class="flag">🇩🇪</span><span class="cname">Germany</span><span class="crole">JCPOA partner</span></div>
+    <div class="ctile t-ally" onclick="show('allies')"><span class="flag">🇫🇷</span><span class="cname">France</span><span class="crole">P5 co-sponsor</span></div>
+    <div class="ctile t-ally" onclick="show('allies')"><span class="flag">🇶🇦</span><span class="cname">Qatar</span><span class="crole">LNG lifeline</span></div>
+    <div class="ctile t-ally" onclick="show('allies')"><span class="flag">🇴🇲</span><span class="cname">Oman</span><span class="crole">Mediator model</span></div>
+    <div class="ctile t-ally" onclick="show('allies')"><span class="flag">🇰🇼</span><span class="cname">Kuwait</span><span class="crole">Easy win</span></div>
+    <div class="ctile t-swing" onclick="show('swing')"><span class="flag">🇦🇪</span><span class="cname">UAE</span><span class="crole">High-value flip</span></div>
+    <div class="ctile t-swing" onclick="show('swing')"><span class="flag">🇸🇦</span><span class="cname">Saudi Arabia</span><span class="crole">Economic bond</span></div>
+    <div class="ctile t-swing" onclick="show('swing')"><span class="flag">🇹🇷</span><span class="cname">Türkiye</span><span class="crole">Independent</span></div>
+    <div class="ctile t-swing" onclick="show('swing')"><span class="flag">🇵🇰</span><span class="cname">Pakistan</span><span class="crole">Energy crisis</span></div>
+    <div class="ctile t-swing" onclick="show('swing')"><span class="flag">🇮🇶</span><span class="cname">Iraq</span><span class="crole">Caught middle</span></div>
+    <div class="ctile t-swing" onclick="show('swing')"><span class="flag">🇧🇭</span><span class="cname">Bahrain</span><span class="crole">US-leaning</span></div>
+    <div class="ctile t-swing" onclick="show('swing')"><span class="flag">🇯🇴</span><span class="cname">Jordan</span><span class="crole">Safe vote</span></div>
+    <div class="ctile t-threat" onclick="show('threats')"><span class="flag">🇮🇷</span><span class="cname">Iran</span><span class="crole">Main antagonist</span></div>
+    <div class="ctile t-threat" onclick="show('threats')"><span class="flag">🇷🇺</span><span class="cname">Russia</span><span class="crole">Veto threat</span></div>
+    <div class="ctile t-threat" onclick="show('threats')"><span class="flag">🇨🇳</span><span class="cname">China</span><span class="crole">Partial threat</span></div>
+    <div class="ctile t-threat" onclick="show('threats')"><span class="flag">🇮🇱</span><span class="cname">Israel</span><span class="crole">Escalation pusher</span></div>
+    <div class="ctile t-threat" onclick="show('threats')"><span class="flag">🇺🇸</span><span class="cname">USA</span><span class="crole">Military risk</span></div>
+    <div class="ctile t-threat" onclick="show('threats')"><span class="flag">🇾🇪</span><span class="cname">Yemen</span><span class="crole">Houthi angle</span></div>
+    <div class="ctile t-neutral" onclick="show('threats')"><span class="flag">🇬🇧</span><span class="cname">UK</span><span class="crole">Mostly aligned</span></div>
+    <div class="ctile t-neutral" onclick="show('threats')"><span class="flag">🇱🇧</span><span class="cname">Lebanon</span><span class="crole">Iran-adjacent</span></div>
+    <div class="ctile t-neutral" onclick="show('threats')"><span class="flag">🇸🇾</span><span class="cname">Syria</span><span class="crole">Russia echo</span></div>
+    <div class="ctile t-neutral"><span class="flag">🇯🇵</span><span class="cname">Japan</span><span class="crole">That's YOU</span></div>
+  </div>
+
+  <div class="stat-row">
+    <div class="stat-box"><div class="stat-num" style="color:var(--ally)">7</div><div class="stat-lbl">Locked Allies</div></div>
+    <div class="stat-box"><div class="stat-num" style="color:var(--swing)">7</div><div class="stat-lbl">Swing States</div></div>
+    <div class="stat-box"><div class="stat-num" style="color:var(--threat)">5</div><div class="stat-lbl">Threats / Oppose</div></div>
+    <div class="stat-box"><div class="stat-num" style="color:var(--accent)">9</div><div class="stat-lbl">Votes Needed</div></div>
+  </div>
+
+  <div class="card accent-card">
+    <div class="section-title">Japan's unique superpower in this room</div>
+    <p style="font-size:13.5px;color:var(--text2);line-height:1.75">You are the <strong style="color:var(--text)">only country all sides trust simultaneously</strong> — Iran respects Japan (PM Abe flew to Tehran in 2019), the USA trusts Japan (treaty ally), China needs Japan (shared LNG dependency through Hormuz), and the Gulf states buy Japan's investments. No other delegate in this room can walk into Tehran's corner and Washington's corner on the same day. This is your superpower. Deploy it in every speech, every unmod, every POI.</p>
+  </div>
+</div>
+
+<!-- ALLIES -->
+<div id="allies" class="panel">
+  <h2>🟢 Natural Allies — Recruit & Co-sponsor First</h2>
+
+  <div class="card ally-card">
+    <div class="card-head"><span class="card-flag">🇰🇷</span><span class="card-name">South Korea</span><span class="cbadge cb-ally">Priority #1</span></div>
+    <p class="card-desc">~70% oil via Hormuz. Identical economic dependency to Japan. US security ally with independent Iran policy. Your most natural partner — same stance on every single issue in this committee.</p>
+    <div class="speech">"South Korea and Japan are in the same boat — literally. Our economies live and die by the Strait of Hormuz. Let's co-sponsor this resolution. A Japan–South Korea joint paper sends an unmistakable signal that Asia's two economic powerhouses stand united for peace."</div>
+    <div class="tip"><strong>Offer:</strong> Let them co-author the IEA emergency petroleum reserve clause. Split speaking time 50/50 in unmod. Make it a joint flagship.</div>
+  </div>
+
+  <div class="card ally-card">
+    <div class="card-head"><span class="card-flag">🇮🇳</span><span class="card-name">India</span><span class="cbadge cb-ally">Priority #2</span></div>
+    <p class="card-desc">World's 3rd largest oil importer; ~60% via Hormuz. Non-Aligned Movement credentials make your paper look truly multilateral, not Western. India-Iran Chabahar deal means India won't want harsh Iran language — use India to soften those clauses strategically.</p>
+    <div class="speech">"India and Japan share the vision of a free and open Indo-Pacific. That vision must extend to the Persian Gulf. Join our energy-dependent nations bloc — our voice together cannot be dismissed as Western interference."</div>
+  </div>
+
+  <div class="card ally-card">
+    <div class="card-head"><span class="card-flag">🇩🇪</span><span class="card-name">Germany</span><span class="cbadge cb-ally">JCPOA Partner</span></div>
+    <p class="card-desc">EU's most vocal JCPOA supporter. Co-designed the INSTEX mechanism to bypass US sanctions for Iran trade. Stance is identical to Japan on diplomacy-first and multilateralism.</p>
+    <div class="speech">"Germany and Japan pioneered the E3+3 diplomatic track. Draft the JCPOA revival clauses together with us — your credibility in Tehran and Brussels strengthens our resolution's balance enormously."</div>
+  </div>
+
+  <div class="card ally-card">
+    <div class="card-head"><span class="card-flag">🇫🇷</span><span class="card-name">France</span><span class="cbadge cb-ally">P5 Shield</span></div>
+    <p class="card-desc">France is a P5 member. French co-sponsorship makes the resolution dramatically harder for Russia/China to veto without looking purely obstructionist. France co-led JCPOA negotiations.</p>
+    <div class="speech">"Help us anchor this resolution in the same balanced tradition France brought to JCPOA. A Japan–France co-sponsorship signals clearly: this is not an anti-Iran paper. It is a pro-peace paper."</div>
+  </div>
+
+  <div class="card ally-card">
+    <div class="card-head"><span class="card-flag">🇶🇦</span><span class="card-name">Qatar</span><span class="cbadge cb-ally">LNG Partnership</span></div>
+    <p class="card-desc">World's top LNG exporter — ALL of it transits Hormuz. Qatar also maintained diplomatic ties with Iran throughout every GCC crisis. Unique credibility in both Tehran and Washington.</p>
+    <div class="speech">"Every tanker that moves Japan's gas passes your coast. Help us craft language Iran can accept — your relationship with Tehran makes you uniquely invaluable to this resolution's success."</div>
+  </div>
+
+  <div class="card ally-card">
+    <div class="card-head"><span class="card-flag">🇴🇲</span><span class="card-name">Oman</span><span class="cbadge cb-ally">The Mediator Model</span></div>
+    <p class="card-desc">Southern shore of Hormuz. Brokered the secret Obama-era nuclear talks in Muscat. Most respected neutral in the entire Gulf. Oman's co-sponsorship is a legitimacy goldmine — the strait's own coastline approves.</p>
+    <div class="speech">"Japan's vision of a UN Special Envoy for Gulf Security is inspired by Oman's own diplomatic tradition. We want to institutionalize what Oman has done informally for decades. Co-sponsor with us."</div>
+  </div>
+
+  <div class="card ally-card">
+    <div class="card-head"><span class="card-flag">🇰🇼</span><span class="card-name">Kuwait</span><span class="cbadge cb-ally">Easy Win</span></div>
+    <p class="card-desc">Exports oil through Hormuz. Experienced the Iraqi invasion of 1990 — deeply values UNSC authority and rules-based international order more than almost any state in this room.</p>
+    <div class="speech">"Kuwait knows better than anyone what happens when international law is ignored in the Gulf. Help us ensure it never happens again — through the UNSC, through law, not unilateral force."</div>
+  </div>
+</div>
+
+<!-- SWING -->
+<div id="swing" class="panel">
+  <h2>🟡 Swing States — How to Flip Each One</h2>
+
+  <div class="card swing-card">
+    <div class="card-head"><span class="card-flag">🇦🇪</span><span class="card-name">UAE</span><span class="cbadge cb-swing">High-Value Flip</span></div>
+    <p class="card-desc">Wants open strait (Dubai = global trade hub) but is deeply anti-Iran and pro-US military. Will push for enforcement language. <strong style="color:var(--swing)">Key exploit:</strong> militarized Gulf damages Dubai's image and port traffic more than any Iranian threat ever could.</p>
+    <div class="speech">"Dubai's status as the world's trade hub depends on a stable, open Gulf. Our monitoring-not-militarization approach protects everything UAE has built. A military confrontation in Hormuz damages Dubai port traffic more than any Iranian threat."</div>
+    <div class="tip"><strong>Concession to offer:</strong> Include language specifically condemning tanker seizures (UAE had one seized in 2022). They'll sign your paper just for that acknowledgment.</div>
+  </div>
+
+  <div class="card swing-card">
+    <div class="card-head"><span class="card-flag">🇸🇦</span><span class="card-name">Saudi Arabia</span><span class="cbadge cb-swing">Economic Bond</span></div>
+    <p class="card-desc">Exports oil through Hormuz. Anti-Iran, pro-US — but does NOT want a full-scale Gulf war that wrecks oil prices and Vision 2030. Japan is Saudi Arabia's top Asian investor.</p>
+    <div class="speech">"Vision 2030 requires a stable Gulf. Japan is your top Asian investment partner. We'll support stronger language condemning Iranian violations IF you help us preserve the diplomatic track. Let's both get what we need."</div>
+    <div class="tip"><strong>Trade offer:</strong> Include a clause condemning Iran's support for Houthi attacks on Saudi infrastructure. Saudi Arabia signs your paper for this. Costs you nothing diplomatically with Iran since it's factual.</div>
+  </div>
+
+  <div class="card swing-card">
+    <div class="card-head"><span class="card-flag">🇹🇷</span><span class="card-name">Türkiye</span><span class="cbadge cb-swing">Independent Broker</span></div>
+    <p class="card-desc">NATO but runs its own foreign policy. Trades with Iran under sanctions. Mediates in Ukraine. Deeply allergic to being told what to do by the West. Will respect Japan's independent stance immediately.</p>
+    <div class="speech">"Japan and Turkey both know what it means to pursue principled independent foreign policy under great power pressure. Our proposal doesn't ask Turkey to choose sides — it asks Turkey to help build a neutral framework. That's exactly Turkey's brand of diplomacy."</div>
+    <div class="tip"><strong>Frame for Turkey:</strong> "A UNSC monitoring body — not NATO, not US-led — is exactly the multilateral mechanism Turkey has always argued for."</div>
+  </div>
+
+  <div class="card swing-card">
+    <div class="card-head"><span class="card-flag">🇵🇰</span><span class="card-name">Pakistan</span><span class="cbadge cb-swing">Energy Poverty Angle</span></div>
+    <p class="card-desc">Severe energy crisis — blackouts, fuel shortages. A Hormuz disruption hits Pakistan hardest among non-Gulf states. Close to both China and Saudi Arabia — follows China's lead when uncertain.</p>
+    <div class="speech">"A disruption in the Strait of Hormuz would not hurt Wall Street first — it would hurt Karachi first. Japan's proposal protects the Global South's right to affordable energy as much as anyone in this room. Stand with us."</div>
+    <div class="tip"><strong>Shortcut:</strong> Win China over first — Pakistan automatically follows China's alignment. Spend your unmod time on Beijing, not Islamabad.</div>
+  </div>
+
+  <div class="card swing-card">
+    <div class="card-head"><span class="card-flag">🇮🇶</span><span class="card-name">Iraq</span><span class="cbadge cb-swing">Caught in the Middle</span></div>
+    <p class="card-desc">Exports oil through the Gulf but is heavily under Iranian political influence. Pulled in two directions — needs open Hormuz economically, owes Iran politically. Target the economic angle hard.</p>
+    <div class="speech">"Iraq's oil revenues — the lifeblood of Iraqi reconstruction — flow through the same waters we seek to protect. Iraq does not need to choose between Iran and the world. Japan's framework respects Iranian sovereignty while securing the passage Iraq depends on."</div>
+  </div>
+
+  <div class="card swing-card">
+    <div class="card-head"><span class="card-flag">🇧🇭</span><span class="card-name">Bahrain</span><span class="cbadge cb-swing">US 5th Fleet Host</span></div>
+    <p class="card-desc">Hosts US Navy's 5th Fleet. Leans toward USA and military framing. Manageable — reassure them your proposal doesn't undermine US military presence, it just adds UN legitimacy on top.</p>
+    <div class="speech">"Japan's monitoring proposal complements existing security architecture — it does not replace it. We add UN legitimacy that makes any security action more defensible globally. The 5th Fleet loses nothing; international law gains everything."</div>
+  </div>
+
+  <div class="card swing-card">
+    <div class="card-head"><span class="card-flag">🇯🇴</span><span class="card-name">Jordan</span><span class="cbadge cb-swing">Safe Easy Vote</span></div>
+    <p class="card-desc">No direct Hormuz stake but supports stability, US ally, pro-multilateralism. The easiest swing vote in the room — one 30-second unmod conversation wins them over.</p>
+    <div class="speech">"Jordan has always been the voice of reason in a turbulent region. Your support for this resolution signals to the entire Arab world that multilateral diplomacy — not escalation — is the path forward."</div>
+  </div>
+</div>
+
+<!-- THREATS -->
+<div id="threats" class="panel">
+  <h2>🔴 Threats — How to Defend Against Each</h2>
+
+  <div class="card threat-card">
+    <div class="card-head"><span class="card-flag">🇮🇷</span><span class="card-name">Iran</span><span class="cbadge cb-threat">Main Antagonist</span></div>
+    <p class="card-desc"><strong style="color:var(--threat)">Will say:</strong> "Hormuz is Iranian sovereign territory. Any UNSC mechanism is Western imperialism. We have the right to close the strait in response to illegal sanctions."</p>
+    <div class="speech">"When the tanker crisis of 2019 erupted — when our own vessel was struck — Japan's Prime Minister still flew to Tehran. Not with ultimatums. With dialogue. Our monitoring proposal covers ALL vessels, ALL flags. If the strait is truly peaceful and lawful, what is there to fear from neutral observation? Japan asks Iran to engage — not as an adversary, but as the partner we have always been."</div>
+    <div class="tip"><strong>Legal knockout:</strong> Iran signed UNCLOS. Article 38 prohibits closing international straits in peacetime. This is not opinion — it is binding treaty law Iran accepted.</div>
+  </div>
+
+  <div class="card threat-card">
+    <div class="card-head"><span class="card-flag">🇷🇺</span><span class="card-name">Russian Federation</span><span class="cbadge cb-threat">Veto Threat</span></div>
+    <p class="card-desc"><strong style="color:var(--threat)">Will say:</strong> "This is another Western attempt to weaponize the UNSC against a sovereign state. Russia will not allow the Council to be used to encircle Iran."</p>
+    <div class="speech">"Japan deliberately chose NOT to join the US-led Operation Sentinel — to preserve exactly this neutrality. Our proposal has zero military component. It is observation and dialogue. We ask Russia: do you oppose transparency in international waters? Or only when it is inconvenient?"</div>
+    <div class="tip"><strong>Concession that works:</strong> Add a preambular clause calling on ALL nations to refrain from unilateral coercive economic measures — implicit criticism of US sanctions. Russia claims a symbolic win and softens on the veto threat.</div>
+  </div>
+
+  <div class="card threat-card">
+    <div class="card-head"><span class="card-flag">🇨🇳</span><span class="card-name">China</span><span class="cbadge cb-threat">Partial Threat — Persuadable</span></div>
+    <p class="card-desc"><strong style="color:var(--threat)">Will say:</strong> "China opposes UNSC mechanisms that could justify interference in regional states' internal affairs. Address US sanctions first."</p>
+    <div class="speech">"China and Japan both import massively through Hormuz — every barrel of oil China receives from the Gulf transits the same 33 kilometers. We are equally vulnerable. Our resolution calls for JCPOA revival — which China co-authored. Help us pass what China helped design. Our monitoring body is UNSC-mandated, not US-led — exactly the multilateral framework China always champions."</div>
+    <div class="tip"><strong>Private unmod offer:</strong> "Let China co-sponsor the JCPOA revival clause only. China gets credit for the diplomatic section. We get the monitoring clause." Let them take the win — your resolution still passes.</div>
+  </div>
+
+  <div class="card threat-card">
+    <div class="card-head"><span class="card-flag">🇺🇸</span><span class="card-name">United States</span><span class="cbadge cb-threat">Ally Gone Militarist</span></div>
+    <p class="card-desc"><strong style="color:var(--threat)">Risk:</strong> USA pushes military authorization language — which SIMULTANEOUSLY triggers China AND Russia vetoes and destroys your entire coalition in one move.</p>
+    <div class="speech">"A UNSC-authorized mission carries legal and diplomatic weight that a unilateral coalition cannot. Help us give the right response the right authority. A UN monitoring mandate does not weaken American presence in the Gulf — it validates it with international legitimacy."</div>
+    <div class="tip"><strong>Private red line to USA:</strong> "We'll support language on Iranian UNCLOS violations IF you drop the military authorization clause. Clean 9 votes beats a guaranteed veto."</div>
+  </div>
+
+  <div class="card threat-card">
+    <div class="card-head"><span class="card-flag">🇮🇱</span><span class="card-name">Israel</span><span class="cbadge cb-threat">Escalation Pusher</span></div>
+    <p class="card-desc"><strong style="color:var(--threat)">Will say:</strong> "Iran's nuclear program and proxies are the root cause. Any resolution that doesn't address Iranian military capability is toothless."</p>
+    <div class="speech">"Japan understands Israel's legitimate security concerns. But this Council must be precise in its mandate. We are here to secure maritime passage — not relitigate the entire Iran-Israel conflict in one resolution. Conflating these issues guarantees a veto and delivers nothing. Japan's focused approach delivers concrete, achievable results now."</div>
+    <div class="tip"><strong>Tactical move:</strong> If Israel goes off-topic, immediately raise a Point of Order: "The delegate's remarks exceed the scope of the present agenda." Shuts down their framing cleanly and publicly.</div>
+  </div>
+
+  <div class="card" style="border-left:3px solid var(--text3)">
+    <div class="card-head"><span class="card-flag">🇾🇪</span><span class="card-name">Yemen</span><span class="cbadge cb-neutral">Houthi Angle</span></div>
+    <p class="card-desc">Will reference the Saudi-led blockade and humanitarian crisis. Houthi attacks on commercial vessels are the elephant in the room that Iran-aligned delegates will try to justify.</p>
+    <div class="speech">"Japan deeply sympathizes with Yemen's humanitarian catastrophe. We support a separate UNSC track for Yemen peace. And our delegation is willing to include humanitarian access language in this resolution as a gesture of good faith to Yemen's civilian population."</div>
+  </div>
+
+  <div class="card" style="border-left:3px solid var(--text3)">
+    <div class="card-head"><span class="card-flag">🇬🇧</span><span class="card-name">United Kingdom</span><span class="cbadge cb-neutral">Mostly Aligned</span></div>
+    <p class="card-desc">UK supports JCPOA revival and multilateral security. More flexible than USA post-Brexit. Steer them away from military enforcement language with the same pitch as USA — they respond to legitimacy framing.</p>
+    <div class="speech">"The UK's tradition of multilateral Gulf engagement is exactly the model our proposal institutionalizes. Help us make it permanent and UN-mandated — that is Britain's finest diplomatic tradition."</div>
+  </div>
+
+  <div class="card" style="border-left:3px solid var(--text3)">
+    <div class="card-head"><span class="card-flag">🇱🇧</span><span class="card-name">Lebanon</span><span class="cbadge cb-neutral">Iran-Adjacent</span></div>
+    <p class="card-desc">Government heavily influenced by Hezbollah. Will echo Iran's position. Treat like a softer version of Iran — same respectful but firm framing. Don't spend unmod time here.</p>
+    <div class="speech">"Lebanon's people — not its factions — deserve a stable Gulf that keeps energy prices manageable. Japan's proposal protects Lebanese civilians as much as anyone in this room."</div>
+  </div>
+
+  <div class="card" style="border-left:3px solid var(--text3)">
+    <div class="card-head"><span class="card-flag">🇸🇾</span><span class="card-name">Syria</span><span class="cbadge cb-neutral">Russia/Iran Echo</span></div>
+    <p class="card-desc">Will echo Russia and Iran. Has little credibility given Syria's own UNSC record. Do not waste unmod time here — build your coalition so large that Syria becomes irrelevant in the vote count.</p>
+    <p class="card-desc" style="margin-bottom:0"><strong style="color:var(--text)">Strategy:</strong> Ignore them in unmod. Let the vote math isolate Syria automatically.</p>
+  </div>
+</div>
+
+<!-- REBUTTALS -->
+<div id="rebuttal" class="panel">
+  <h2>⚔️ Rebuttal Toolkit — Any Attack, Instant Counter</h2>
+
+  <div class="reb-card">
+    <div class="reb-attack">"Japan is just following America's lead"</div>
+    <div class="speech">"Japan deployed its own MSDF mission — NOT under US command, NOT inside Operation Sentinel. Japan maintained diplomatic relations with Iran when Washington imposed maximum pressure. We speak for Japan, not for Washington. Our independence is documented, not claimed."</div>
+  </div>
+
+  <div class="reb-card">
+    <div class="reb-attack">"Your monitoring proposal is a pretext for military action"</div>
+    <div class="speech">"Japan's constitution — Article 9 — prohibits offensive military action. Japan cannot legally launch or join a military strike. Our proposal is structurally incapable of being a military pretext because Japan cannot be party to one. The monitoring mission is civilian, neutral, and UNSC-mandated. Full stop."</div>
+  </div>
+
+  <div class="reb-card">
+    <div class="reb-attack">"JCPOA failed — diplomacy doesn't work with Iran"</div>
+    <div class="speech">"The JCPOA didn't fail — it was abandoned. The IAEA certified Iranian compliance for three consecutive years. The framework collapsed when the US unilaterally withdrew in 2018 and Europe failed to deliver promised sanctions relief. We don't condemn diplomacy because one party walked away from the table. We return to the table."</div>
+  </div>
+
+  <div class="reb-card">
+    <div class="reb-attack">"Iran has sovereignty over the Strait"</div>
+    <div class="speech">"Japan fully respects Iranian sovereignty over its territorial waters. But the Strait of Hormuz is an international strait under UNCLOS Article 37 — to which Iran is a signatory. Transit passage is a right under customary international law. Sovereignty ends where binding treaty obligations begin — for every state in this room, including Japan."</div>
+  </div>
+
+  <div class="reb-card">
+    <div class="reb-attack">"This resolution serves rich countries, not the Global South"</div>
+    <div class="speech">"The countries that suffer MOST from a Hormuz closure are not Japan or the USA — they are Pakistan, India, Sri Lanka, and East African nations with no strategic reserves and no buffer against price shocks. Our IEA emergency reserve protocol extends to non-IEA nations in crisis. This resolution protects the Global South first and foremost."</div>
+  </div>
+
+  <div class="reb-card">
+    <div class="reb-attack">"Why should we trust Japan as a mediator?"</div>
+    <div class="speech">"Because Japan has earned it. Our tanker was attacked in 2019 — and our Prime Minister still flew to Tehran. We maintained LNG contracts with Iran during maximum pressure. We deployed ships without joining a military coalition. We have active relationships in Riyadh, Tehran, Washington, and Beijing simultaneously. No other country in this room can say the same. That IS what a mediator looks like."</div>
+  </div>
+
+  <div class="reb-card">
+    <div class="reb-attack">"Japan is a non-regional actor with no standing here"</div>
+    <div class="speech">"Japan is the world's largest LNG importer and a top-three crude oil importer — virtually all of it through Hormuz. Japan's economic presence in this region exceeds many states on this Council. We are not observers. We are stakeholders. And we have the scars — a struck tanker in June 2019 — to prove it."</div>
+  </div>
+
+  <div class="reb-card">
+    <div class="reb-attack">"Unilateral sanctions by the US are the root cause — address that first"</div>
+    <div class="speech">"Japan agrees that unilateral coercive measures destabilize diplomacy — that is precisely why our resolution calls for UNSC-authorized multilateral frameworks rather than unilateral actions by any power. Japan itself never supported the maximum pressure campaign. Our resolution is the alternative the international community needs."</div>
+  </div>
+</div>
+
+<!-- VOTE MATH -->
+<div id="votemath" class="panel">
+  <h2>🗳 Vote Math — How Japan Passes This Resolution</h2>
+  <p style="font-size:13px;color:var(--text3);margin-bottom:1.25rem;font-family:'IBM Plex Mono',monospace">UNSC threshold: 9 affirmative votes + no P5 veto (USA, UK, France, China, Russia)</p>
+
+  <div class="vote-section">
+    <div class="section-title">Locked allies — votes you start with</div>
+    <div class="chips">
+      <span class="chip chip-ally">🇯🇵 Japan</span>
+      <span class="chip chip-ally">🇰🇷 S. Korea</span>
+      <span class="chip chip-ally">🇮🇳 India</span>
+      <span class="chip chip-ally">🇩🇪 Germany</span>
+      <span class="chip chip-ally">🇫🇷 France</span>
+      <span class="chip chip-ally">🇬🇧 UK</span>
+      <span class="chip chip-ally">🇶🇦 Qatar</span>
+      <span class="chip chip-ally">🇴🇲 Oman</span>
+      <span class="chip chip-ally">🇰🇼 Kuwait</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:16px;margin-top:12px">
+      <div>
+        <div class="vote-number" style="color:var(--ally)">9</div>
+        <div class="vote-sub">LOCKED VOTES</div>
+      </div>
+      <div style="flex:1">
+        <div class="pbar"><div class="pfill pfill-ally" style="width:60%"></div></div>
+        <p style="font-size:12px;color:var(--ally);font-family:'IBM Plex Mono',monospace">✅ Already at the minimum threshold before campaigning even starts</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="vote-section">
+    <div class="section-title">Likely flips — extra buffer with unmod work</div>
+    <div class="chips">
+      <span class="chip chip-swing">🇦🇪 UAE</span>
+      <span class="chip chip-swing">🇸🇦 Saudi Arabia</span>
+      <span class="chip chip-swing">🇹🇷 Türkiye</span>
+      <span class="chip chip-swing">🇵🇰 Pakistan</span>
+      <span class="chip chip-swing">🇯🇴 Jordan</span>
+      <span class="chip chip-swing">🇧🇭 Bahrain</span>
+      <span class="chip chip-swing">🇮🇶 Iraq</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:16px;margin-top:12px">
+      <div>
+        <div class="vote-number" style="color:var(--swing)">+7</div>
+        <div class="vote-sub">POTENTIAL</div>
+      </div>
+      <div style="flex:1">
+        <div class="pbar"><div class="pfill pfill-swing" style="width:100%"></div></div>
+        <p style="font-size:12px;color:var(--swing);font-family:'IBM Plex Mono',monospace">Potential total: 16 votes — overwhelming majority, veto-proof narrative</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="vote-section">
+    <div class="section-title">P5 veto threats — the decisive challenge</div>
+    <div class="chips">
+      <span class="chip chip-threat">🇷🇺 Russia — likely veto</span>
+      <span class="chip chip-swing">🇨🇳 China — persuadable with JCPOA offer</span>
+      <span class="chip chip-swing">🇺🇸 USA — ally but must be steered</span>
+    </div>
+    <div class="tip" style="margin-top:.75rem"><strong>Key insight:</strong> Win China → Russia's veto becomes isolated and looks purely obstructionist to the room. Even if Russia vetoes, 11+ votes on record means Japan leads and Russia blocks peace. That is the narrative win in MUN scoring.</div>
+  </div>
+
+  <div class="scenarios">
+    <div class="scenario sc-best">
+      <div class="sc-label">Best Case</div>
+      <p class="sc-text">China abstains (not vetoes) after JCPOA co-sponsorship deal. USA drops military clause. Russia isolated. Resolution passes 14-0-1. Japan wins the room decisively.</p>
+    </div>
+    <div class="scenario sc-worst">
+      <div class="sc-label">Worst Case</div>
+      <p class="sc-text">Russia vetoes. But 11+ votes on record. In MUN scoring, Japan demonstrated coalition leadership, balanced diplomacy, and Russia took the blame. You still win the narrative and the awards.</p>
+    </div>
+  </div>
+</div>
+
+<!-- WIN PLAN -->
+<div id="winplan" class="panel">
+  <h2>🏆 Step-by-Step Win Plan</h2>
+
+  <div class="phase ph1" data-num="1">
+    <div class="phase-label">Phase 1 — Opening Round · GSL + Mod 1</div>
+    <h3>Plant Your Flag, Lock Identity</h3>
+    <ul>
+      <li>Deliver GSL speech and state Japan's 3 pillars clearly. Frame the debate before anyone else does.</li>
+      <li>First unmod — even 60 seconds: find South Korea and India immediately. One sentence: "We're co-sponsoring, right?"</li>
+      <li>Mod 1: pure LEGAL framing — UNCLOS, international law, transit passage. Uncontroversial enough to get Germany, France, UK, and Gulf states nodding early without triggering Russia/Iran.</li>
+      <li>Do NOT engage Iran or Russia aggressively in Phase 1. Appear reasonable, open, buildable. Let them reveal their positions first.</li>
+      <li>Raise a POI to Iran: "Will the delegate clarify Iran's position on UNCLOS Article 38, to which Iran is a signatory?" — puts them on the defensive immediately.</li>
+    </ul>
+  </div>
+
+  <div class="phase ph2" data-num="2">
+    <div class="phase-label">Phase 2 — Mid Debate · Mod 2 + Unmod 1</div>
+    <h3>Build the Bloc, Draft the Paper</h3>
+    <ul>
+      <li>Move for unmod after Mod 2. Have a draft working paper outline ready on paper — even rough headings.</li>
+      <li>Co-sponsor order: South Korea → India → Germany → France → Qatar → Oman → Kuwait. That's 7 before you even talk to GCC states.</li>
+      <li>Private pitch to China: "Co-sponsor the JCPOA revival clause only — you get diplomatic credit, we get the monitoring clause. Split the win." Don't ask China for everything.</li>
+      <li>To Saudi Arabia + UAE: offer the tanker seizure condemnation clause specifically — they sign for that acknowledgment.</li>
+      <li>Private red line to USA: "Drop military authorization, we add Iranian UNCLOS violation language." That's the trade.</li>
+    </ul>
+  </div>
+
+  <div class="phase ph3" data-num="3">
+    <div class="phase-label">Phase 3 — Late Debate · Mod 3 + Unmod 2</div>
+    <h3>Merge Papers, Isolate Opposition</h3>
+    <ul>
+      <li>If a competing paper exists (likely USA bloc or Russia/Iran bloc), propose a merger. You negotiate from 7+ co-sponsor strength.</li>
+      <li>Make your paper so balanced that vetoing it looks purely obstructionist — JCPOA revival, Iranian sovereignty respected, zero military mandate, IEA emergency protocols included.</li>
+      <li>Mod 3 speech: present your full architecture as a complete solution, not a partial measure. Be the closer. Make delegates feel your resolution is the only adult in the room.</li>
+      <li>If Russia signals veto: offer ONE preambular concession — language on "unilateral coercive measures." Russia takes the symbolic win, veto threat softens.</li>
+      <li>Fire your best one-liners here: "We cannot sanction our way to security. We tried that from 2018 to 2023. The result was more tanker seizures, not fewer."</li>
+    </ul>
+  </div>
+
+  <div class="phase ph4" data-num="4">
+    <div class="phase-label">Endgame · Voting Bloc</div>
+    <h3>Control the Count, Win the Narrative</h3>
+    <ul>
+      <li>Minimum viable: Japan + S. Korea + India + Germany + France + UK + Qatar + Oman + Kuwait = 9. You start there. Everything else is buffer.</li>
+      <li>China is your biggest diplomatic investment. Spend the most unmod time with China — it unlocks Pakistan too.</li>
+      <li>Never — under any circumstances — let USA push military authorization language into the resolution. That single clause triggers simultaneous China AND Russia vetoes and collapses your entire coalition.</li>
+      <li>If Russia vetoes anyway: 11+ votes on record is a diplomatic masterclass. Russia isolated itself. Japan leads. That's the story, and that's the award.</li>
+    </ul>
+  </div>
+
+  <div class="weapon-card">
+    <div class="weapon-label">Japan's Ultimate Weapon</div>
+    <div class="weapon-title">You are the only country all sides trust simultaneously</div>
+    <p class="weapon-text">Iran respects Japan — PM Abe flew to Tehran when no other leader would. The USA trusts Japan — treaty ally for 70 years. China needs Japan — shared LNG vulnerability through the exact strait being debated. The Gulf states value Japan — top investor, reliable partner, no colonial history in the region. <strong>No other delegate in this room can walk into Tehran's corner and Washington's corner on the same day.</strong> This is not just a talking point — it is a structural advantage. Remind the room of it in every speech, every unmod conversation, every rebuttal. In a diplomatic crisis, credibility is the only currency that matters. Japan has it. Use it without hesitation.</p>
+  </div>
+</div>
+
+<script>
+function show(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tbtn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  const order = ['map','allies','swing','threats','rebuttal','votemath','winplan'];
+  document.querySelectorAll('.tbtn')[order.indexOf(id)].classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
