@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UNSC Complete Process Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=Inter:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #07090f;
+  --s1: #0c1018;
+  --s2: #101520;
+  --s3: #141a24;
+  --border: #1c2535;
+  --border2: #243040;
+  --text: #dde4f0;
+  --text2: #8494ae;
+  --text3: #44546a;
+  --gold: #d4a843;
+  --gold-bg: #1a1200;
+  --gold-border: #4a3200;
+  --blue: #4d90f0;
+  --blue-bg: #070f1f;
+  --blue-border: #1a3060;
+  --green: #3dbf7a;
+  --green-bg: #061410;
+  --green-border: #0f4028;
+  --red: #e85454;
+  --red-bg: #140808;
+  --red-border: #4a1010;
+  --purple: #9b72f0;
+  --purple-bg: #0e0818;
+  --purple-border: #301860;
+  --teal: #2ec4b6;
+  --teal-bg: #031210;
+  --teal-border: #0c3c38;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh}
+
+/* HERO */
+.hero{background:linear-gradient(160deg,#0c1830 0%,var(--bg) 70%);padding:3rem 2rem 2rem;text-align:center;border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(77,144,240,.08),transparent 70%)}
+.hero-label{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:500;letter-spacing:.14em;color:var(--text3);text-transform:uppercase;margin-bottom:.75rem}
+.hero h1{font-family:'Syne',sans-serif;font-size:clamp(24px,5vw,40px);font-weight:800;letter-spacing:-.03em;margin-bottom:.5rem}
+.hero h1 span{color:var(--blue)}
+.hero-sub{font-size:14px;color:var(--text2);max-width:560px;margin:0 auto 1.5rem}
+.hero-chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.hchip{font-size:11px;padding:4px 12px;border-radius:20px;font-family:'IBM Plex Mono',monospace;font-weight:500}
+.hc-b{background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue-border)}
+.hc-g{background:var(--gold-bg);color:var(--gold);border:1px solid var(--gold-border)}
+.hc-gr{background:var(--green-bg);color:var(--green);border:1px solid var(--green-border)}
+.hc-r{background:var(--red-bg);color:var(--red);border:1px solid var(--red-border)}
+
+/* NAV */
+.nav-bar{position:sticky;top:0;z-index:50;background:rgba(7,9,15,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);overflow-x:auto}
+.nav-bar::-webkit-scrollbar{height:0}
+.nav-inner{display:flex;min-width:max-content;padding:0 1.5rem}
+.nbtn{font-family:'Syne',sans-serif;font-size:12px;font-weight:600;padding:14px 16px;border:none;background:none;color:var(--text3);cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;letter-spacing:.02em;white-space:nowrap}
+.nbtn.active{color:var(--blue);border-bottom-color:var(--blue)}
+.nbtn:hover:not(.active){color:var(--text2)}
+
+/* PANELS */
+.panel{display:none;padding:2rem;max-width:960px;margin:0 auto;animation:fi .2s ease}
+.panel.active{display:block}
+@keyframes fi{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+/* TYPOGRAPHY */
+.section-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--text3);margin-bottom:.5rem}
+h2{font-family:'Syne',sans-serif;font-size:24px;font-weight:800;letter-spacing:-.02em;color:var(--text);margin-bottom:1.5rem}
+h3{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:var(--text);margin-bottom:.5rem}
+p,li{font-size:13.5px;color:var(--text2);line-height:1.75}
+ul{padding-left:1.2rem}
+li{margin-bottom:.3rem}
+strong{color:var(--text);font-weight:500}
+
+/* CARDS */
+.card{background:var(--s1);border:1px solid var(--border);border-radius:12px;padding:1.25rem 1.35rem;margin-bottom:1rem}
+.card.gold{border-left:3px solid var(--gold)}
+.card.blue{border-left:3px solid var(--blue)}
+.card.green{border-left:3px solid var(--green)}
+.card.red{border-left:3px solid var(--red)}
+.card.purple{border-left:3px solid var(--purple)}
+.card.teal{border-left:3px solid var(--teal)}
+
+/* TIMELINE */
+.timeline{position:relative;padding-left:2rem}
+.timeline::before{content:'';position:absolute;left:8px;top:4px;bottom:4px;width:2px;background:linear-gradient(to bottom,var(--blue),var(--teal),var(--green))}
+.tl-item{position:relative;margin-bottom:1.75rem}
+.tl-dot{position:absolute;left:-2rem;top:4px;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;font-family:'IBM Plex Mono',monospace;flex-shrink:0}
+.tl-dot.blue{background:var(--blue-bg);border:2px solid var(--blue);color:var(--blue)}
+.tl-dot.gold{background:var(--gold-bg);border:2px solid var(--gold);color:var(--gold)}
+.tl-dot.green{background:var(--green-bg);border:2px solid var(--green);color:var(--green)}
+.tl-dot.red{background:var(--red-bg);border:2px solid var(--red);color:var(--red)}
+.tl-dot.purple{background:var(--purple-bg);border:2px solid var(--purple);color:var(--purple)}
+.tl-dot.teal{background:var(--teal-bg);border:2px solid var(--teal);color:var(--teal)}
+.tl-title{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--text);margin-bottom:.35rem}
+.tl-body{font-size:13px;color:var(--text2);line-height:1.7}
+
+/* PROCEDURE TABLE */
+.proc-grid{display:grid;gap:.6rem}
+.proc-row{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+.proc-box{background:var(--s2);border:1px solid var(--border);border-radius:10px;padding:.9rem 1rem}
+.proc-label{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.35rem}
+.proc-text{font-size:12.5px;color:var(--text2);line-height:1.65}
+.proc-text em{color:var(--gold);font-style:italic}
+
+/* SPEECH QUOTE */
+.quote{background:rgba(77,144,240,.06);border-left:2px solid var(--blue);border-radius:0 8px 8px 0;padding:.85rem 1.1rem;margin:.75rem 0;font-size:13px;color:#90b8f8;line-height:1.8;font-style:italic}
+.quote strong{color:#bdd6ff;font-style:normal}
+
+/* BADGE ROW */
+.badges{display:flex;flex-wrap:wrap;gap:6px;margin:.75rem 0}
+.badge{font-size:11px;padding:3px 10px;border-radius:12px;font-weight:500;font-family:'IBM Plex Mono',monospace}
+.b-blue{background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue-border)}
+.b-gold{background:var(--gold-bg);color:var(--gold);border:1px solid var(--gold-border)}
+.b-green{background:var(--green-bg);color:var(--green);border:1px solid var(--green-border)}
+.b-red{background:var(--red-bg);color:var(--red);border:1px solid var(--red-border)}
+.b-purple{background:var(--purple-bg);color:var(--purple);border:1px solid var(--purple-border)}
+.b-teal{background:var(--teal-bg);color:var(--teal);border:1px solid var(--teal-border)}
+
+/* COMPARISON TABLE */
+.ctable{width:100%;border-collapse:collapse;margin:1rem 0;font-size:13px}
+.ctable th{background:var(--s3);padding:.7rem .9rem;text-align:left;font-family:'Syne',sans-serif;font-size:12px;font-weight:700;letter-spacing:.04em;color:var(--text2);border-bottom:1px solid var(--border2)}
+.ctable td{padding:.65rem .9rem;border-bottom:1px solid var(--border);vertical-align:top;color:var(--text2);line-height:1.6}
+.ctable tr:last-child td{border-bottom:none}
+.ctable .yes{color:var(--green)}
+.ctable .no{color:var(--red)}
+.ctable .warn{color:var(--gold)}
+
+/* MOTION CARDS */
+.motion-card{background:var(--s1);border:1px solid var(--border);border-radius:12px;padding:1.1rem 1.25rem;margin-bottom:.85rem;transition:border-color .2s}
+.motion-card:hover{border-color:var(--border2)}
+.mc-head{display:flex;align-items:center;gap:10px;margin-bottom:.6rem;flex-wrap:wrap}
+.mc-icon{font-size:20px;flex-shrink:0}
+.mc-name{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--text)}
+.mc-tag{font-size:10px;padding:2px 8px;border-radius:10px;font-family:'IBM Plex Mono',monospace;font-weight:500;margin-left:auto}
+.mc-body{font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:.6rem}
+.mc-formula{background:var(--s3);border-radius:8px;padding:.65rem .9rem;font-size:12px;color:var(--gold);font-family:'IBM Plex Mono',monospace;line-height:1.6}
+
+/* VOTE VISUAL */
+.vote-vis{background:var(--s2);border:1px solid var(--border);border-radius:12px;padding:1.25rem;margin:1rem 0}
+.vote-row{display:flex;flex-wrap:wrap;gap:8px;margin:.6rem 0}
+.vchip{font-size:12px;padding:5px 12px;border-radius:20px;font-weight:500}
+.vc-yes{background:var(--green-bg);color:var(--green);border:1px solid var(--green-border)}
+.vc-no{background:var(--red-bg);color:var(--red);border:1px solid var(--red-border)}
+.vc-abs{background:var(--s3);color:var(--text2);border:1px solid var(--border2)}
+.vc-veto{background:#2a0808;color:#ff6b6b;border:2px solid var(--red-border);font-weight:700}
+
+/* FLOW STEPS */
+.flow{display:flex;flex-direction:column;gap:0}
+.flow-step{display:flex;gap:14px;padding:1rem 0;border-bottom:1px solid var(--border)}
+.flow-step:last-child{border-bottom:none}
+.flow-num{flex-shrink:0;width:32px;height:32px;border-radius:50%;background:var(--blue-bg);border:1px solid var(--blue-border);color:var(--blue);font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center}
+.flow-content h4{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--text);margin-bottom:.3rem}
+.flow-content p{font-size:13px;color:var(--text2);line-height:1.65}
+
+/* ALERT BOX */
+.alert{border-radius:10px;padding:.9rem 1.1rem;margin:.75rem 0;display:flex;gap:10px}
+.alert-gold{background:rgba(212,168,67,.07);border:1px solid var(--gold-border)}
+.alert-red{background:rgba(232,84,84,.07);border:1px solid var(--red-border)}
+.alert-blue{background:rgba(77,144,240,.07);border:1px solid var(--blue-border)}
+.alert-icon{font-size:16px;flex-shrink:0;margin-top:1px}
+.alert-text{font-size:13px;line-height:1.7}
+.alert-gold .alert-text{color:#c8963a}
+.alert-red .alert-text{color:#c84444}
+.alert-blue .alert-text{color:#5a8fd4}
+
+/* CHEAT CARD */
+.cheat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px;margin:1rem 0}
+.cheat-box{background:var(--s2);border:1px solid var(--border);border-radius:10px;padding:.9rem 1rem}
+.cheat-q{font-size:12px;font-weight:600;color:var(--gold);font-family:'Syne',sans-serif;margin-bottom:.35rem}
+.cheat-a{font-size:12px;color:var(--blue);font-family:'IBM Plex Mono',monospace;line-height:1.6;font-style:italic}
+
+@media(max-width:600px){
+  .proc-row{grid-template-columns:1fr}
+  .panel{padding:1.25rem 1rem}
+  .hero{padding:2rem 1rem 1.5rem}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-label">Complete Procedural Manual</div>
+  <h1>The <span>UNSC</span> Process<br>From Gavel to Resolution</h1>
+  <p class="hero-sub">Everything you need to know about how the United Nations Security Council actually works — in a simulation and in real life.</p>
+  <div class="hero-chips">
+    <span class="hchip hc-b">15 Members</span>
+    <span class="hchip hc-g">5 Permanent + 10 Elected</span>
+    <span class="hchip hc-gr">9 Votes to Pass</span>
+    <span class="hchip hc-r">P5 Veto Power</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<div class="nav-bar">
+  <div class="nav-inner">
+    <button class="nbtn active" onclick="show('overview')">🏛 Overview</button>
+    <button class="nbtn" onclick="show('composition')">👥 Composition</button>
+    <button class="nbtn" onclick="show('flow')">🔄 Full Flow</button>
+    <button class="nbtn" onclick="show('motions')">📋 All Motions</button>
+    <button class="nbtn" onclick="show('points')">✋ Points</button>
+    <button class="nbtn" onclick="show('debate')">🎙 Debate Types</button>
+    <button class="nbtn" onclick="show('documents')">📄 Documents</button>
+    <button class="nbtn" onclick="show('voting')">🗳 Voting</button>
+    <button class="nbtn" onclick="show('veto')">🚫 The Veto</button>
+    <button class="nbtn" onclick="show('vsga')">⚖️ UNSC vs GA</button>
+    <button class="nbtn" onclick="show('cheatsheet')">⚡ Cheat Sheet</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- OVERVIEW -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div id="overview" class="panel active">
+  <div class="section-eyebrow">What is it?</div>
+  <h2>The UN Security Council</h2>
+
+  <div class="card blue">
+    <h3>The most powerful body in international law</h3>
+    <p>The UNSC is the only UN organ whose <strong>decisions are legally binding</strong> on all 193 UN member states. While the General Assembly debates and recommends, the Security Council <strong>acts</strong>. It can authorize military force, impose sanctions, establish peacekeeping missions, and refer cases to the International Criminal Court. No other international body has this authority.</p>
+  </div>
+
+  <div class="card gold">
+    <h3>Its primary mandate</h3>
+    <p>Under the UN Charter (Chapter V–VII), the UNSC holds <strong>primary responsibility for the maintenance of international peace and security</strong>. When the Council determines that a situation constitutes a "threat to the peace, breach of the peace, or act of aggression" (Article 39), it can take binding action under:</p>
+    <div class="badges">
+      <span class="badge b-blue">Chapter VI — Peaceful Settlement</span>
+      <span class="badge b-gold">Chapter VII — Enforcement Action</span>
+      <span class="badge b-teal">Chapter VIII — Regional Arrangements</span>
+    </div>
+  </div>
+
+  <div class="card green">
+    <h3>Why UNSC simulation is different from GA-MUN</h3>
+    <ul>
+      <li><strong>Smaller and more intense</strong> — only 15 delegations, every delegate speaks frequently</li>
+      <li><strong>Vetoes are real</strong> — one P5 member can kill any resolution</li>
+      <li><strong>More formal procedure</strong> — the President (Chair) has far more control over debate</li>
+      <li><strong>Higher political stakes</strong> — positions must be consistent with real state policy</li>
+      <li><strong>Resolutions are binding</strong> — in real life, the world must comply</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- COMPOSITION -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div id="composition" class="panel">
+  <div class="section-eyebrow">Who sits at the table?</div>
+  <h2>Council Composition</h2>
+
+  <div class="card red">
+    <h3>🔴 Permanent Members (P5) — The Veto Holders</h3>
+    <p style="margin-bottom:.75rem">These 5 nations hold permanent seats and the power of veto. They were the victorious Allied powers of World War II.</p>
+    <div class="badges">
+      <span class="badge b-red">🇺🇸 United States</span>
+      <span class="badge b-red">🇬🇧 United Kingdom</span>
+      <span class="badge b-red">🇫🇷 France</span>
+      <span class="badge b-red">🇷🇺 Russia</span>
+      <span class="badge b-red">🇨🇳 China</span>
+    </div>
+    <p style="margin-top:.75rem">A single <strong>NO vote</strong> from any P5 member on a substantive matter = the resolution dies. No appeal, no override.</p>
+  </div>
+
+  <div class="card blue">
+    <h3>🔵 Elected Members (E10) — Two-Year Terms</h3>
+    <p>Ten non-permanent members elected by the GA for 2-year terms. They rotate based on regional groups and <strong>have no veto power</strong> but their votes are essential — you still need 9 total affirmative votes.</p>
+    <div class="alert alert-blue">
+      <div class="alert-icon">💡</div>
+      <div class="alert-text">In your simulation, the 24 countries listed include both P5 members and non-P5 states. In a real UNSC only 15 sit. Your sim has expanded membership — treat everyone with the same procedural rules but remember only the real P5 can veto.</div>
+    </div>
+  </div>
+
+  <div class="card gold">
+    <h3>The President of the Council</h3>
+    <p>The presidency <strong>rotates monthly</strong> among all 15 members in alphabetical order. The President conducts sessions, recognizes speakers, puts motions to a vote, and manages debate. In simulations, this role is played by the <strong>Chair/Director</strong>. You address them as:</p>
+    <div class="quote"><strong>"Mr. / Madam President"</strong> — not "Honorable Chair" (that's GA language)</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- FULL FLOW -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div id="flow" class="panel">
+  <div class="section-eyebrow">From start to finish</div>
+  <h2>The Complete Session Flow</h2>
+
+  <div class="timeline">
+
+    <div class="tl-item">
+      <div class="tl-dot blue">1</div>
+      <div class="tl-title">Opening — Roll Call & Quorum</div>
+      <p class="tl-body">The President calls the session to order and conducts a <strong>roll call</strong>. Each delegation responds <em>"Present"</em> or <em>"Present and Voting."</em> "Present and Voting" means you cannot abstain later. A quorum (majority of members) must be established before any business can proceed. The agenda is formally adopted — usually by acclamation or a simple procedural vote.</p>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot gold">2</div>
+      <div class="tl-title">Setting the Agenda</div>
+      <p class="tl-body">If there is more than one item, a motion is made to set the order of business. In most simulations with one agenda item (e.g., Strait of Hormuz), this is done automatically. The President announces: <em>"The Council will now consider the item on its agenda: [topic]."</em></p>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot blue">3</div>
+      <div class="tl-title">General Speakers List (GSL) Opens</div>
+      <p class="tl-body">The President opens the General Speakers List. Delegates raise their placards and the President adds them to the list. Each delegation delivers an <strong>opening speech</strong> (typically 60–120 seconds) stating their country's position. This is your first chance to plant your flag, establish your stance, and signal potential alliances. The GSL continues throughout the session as a fallback between other modes of debate.</p>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot teal">4</div>
+      <div class="tl-title">Moderated Caucus (Focused Debate)</div>
+      <p class="tl-body">Any delegate can motion for a moderated caucus on a specific topic. If passed, the President recognizes speakers one by one for short speeches. This is the <strong>main engine of formal debate</strong>. Multiple moderated caucuses occur throughout the session, each focused on a different subtopic. Most of your prepared speeches will be delivered here.</p>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot green">5</div>
+      <div class="tl-title">Unmoderated Caucus (Informal Negotiation)</div>
+      <p class="tl-body">The session is suspended. Delegates leave their seats, move around freely, and negotiate. This is where <strong>alliances are built, working papers are drafted, compromises are made, and blocs are formed.</strong> No formal record is kept. This is the most important part of UNSC — the real diplomacy happens here. Use every second wisely.</p>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot purple">6</div>
+      <div class="tl-title">Working Paper Stage</div>
+      <p class="tl-body">During or after unmod, delegations submit a <strong>Working Paper</strong> — an informal draft resolution with preambulatory and operative clauses. It doesn't have binding status yet. The President acknowledges it. Other delegations can sign as <strong>signatories</strong> (support debate) or <strong>co-sponsors</strong> (endorse the content). Multiple competing working papers may exist simultaneously.</p>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot gold">7</div>
+      <div class="tl-title">Draft Resolution Stage</div>
+      <p class="tl-body">A working paper is upgraded to a <strong>Draft Resolution</strong> when it is formally introduced on the floor and accepted by the President. It receives an official number (e.g., <em>S/2026/DR/1</em>). From this point, it is read aloud or distributed, debated in moderated caucuses, and can be amended. This is the document that will be voted on.</p>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot teal">8</div>
+      <div class="tl-title">Amendments</div>
+      <p class="tl-body">Any delegation can propose a <strong>Friendly Amendment</strong> (accepted by the main sponsors — no vote needed) or an <strong>Unfriendly Amendment</strong> (opposed by sponsors — requires a simple majority vote to be incorporated). Amendments change specific clauses in the draft resolution before the final vote.</p>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot red">9</div>
+      <div class="tl-title">Closing Debate & Voting Procedure</div>
+      <p class="tl-body">A delegate motions to <em>"close debate"</em> on the draft resolution. This is voted on — requires a simple majority. If debate closes, the Council moves immediately into <strong>Voting Procedure</strong>. During voting procedure, <strong>no one may speak, leave, or interrupt</strong> until all votes are recorded. The President calls each delegation and records Yes / No / Abstain.</p>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot green">10</div>
+      <div class="tl-title">Explanation of Vote (EOV)</div>
+      <p class="tl-body">After voting, delegations may request the floor for an <strong>Explanation of Vote</strong> — a brief statement explaining why they voted the way they did. This is especially important if a P5 member vetoed, or if a country voted against its usual alliance. It's a diplomatic face-saving mechanism and a rhetorical opportunity.</p>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot blue">11</div>
+      <div class="tl-title">Resolution Adopted or Vetoed</div>
+      <p class="tl-body">If the resolution receives <strong>9+ affirmative votes AND no P5 veto</strong>, it passes and becomes an official Security Council Resolution. If a P5 member votes NO — it is <strong>vetoed and fails entirely</strong>, regardless of how many others voted yes. The session may then continue with debate on a new or amended draft.</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- MOTIONS -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div id="motions" class="panel">
+  <div class="section-eyebrow">How to move</div>
+  <h2>All Procedural Motions</h2>
+
+  <div class="alert alert-gold">
+    <div class="alert-icon">⚠️</div>
+    <div class="alert-text">In UNSC, always get the floor first: raise your placard and wait for the President to say <em>"The Chair recognizes [Country]."</em> Then make your motion. Never speak without being recognized.</div>
+  </div>
+
+  <div class="motion-card">
+    <div class="mc-head">
+      <div class="mc-icon">🎙</div>
+      <div class="mc-name">Request to Speak (Floor Request)</div>
+      <span class="mc-tag b-blue badge">Any time</span>
+    </div>
+    <p class="mc-body">The most basic action. Before ANY speech or motion, you must be recognized.</p>
+    <div class="mc-formula">"The delegation of [Country] requests the floor."</div>
+  </div>
+
+  <div class="motion-card">
+    <div class="mc-head">
+      <div class="mc-icon">📋</div>
+      <div class="mc-name">Moderated Caucus</div>
+      <span class="mc-tag b-teal badge">Formal debate</span>
+    </div>
+    <p class="mc-body">Opens a structured, Chair-moderated debate on a specific subtopic. Delegates are recognized one by one. The most-used mode in UNSC. Requires a simple majority to pass.</p>
+    <div class="mc-formula">"The delegation of [Country] motions for a moderated caucus of [total time], with [X] seconds per speaker, on the topic of [specific topic]."</div>
+  </div>
+
+  <div class="motion-card">
+    <div class="mc-head">
+      <div class="mc-icon">🤝</div>
+      <div class="mc-name">Unmoderated Caucus</div>
+      <span class="mc-tag b-green badge">Informal negotiation</span>
+    </div>
+    <p class="mc-body">Suspends formal session. Delegates move freely to negotiate, draft, and build blocs. No formal record. Essential for passing any resolution. Requires a simple majority to pass.</p>
+    <div class="mc-formula">"The delegation of [Country] motions for an unmoderated caucus of [time] for the purpose of [working paper drafting / bloc consultation / etc.]."</div>
+  </div>
+
+  <div class="motion-card">
+    <div class="mc-head">
+      <div class="mc-icon">⏱</div>
+      <div class="mc-name">Extension of Caucus</div>
+      <span class="mc-tag b-gold badge">Time extension</span>
+    </div>
+    <p class="mc-body">When a caucus is running out of time and debate is unfinished. Made immediately before time expires.</p>
+    <div class="mc-formula">"The delegation of [Country] motions to extend the current caucus by [time]."</div>
+  </div>
+
+  <div class="motion-card">
+    <div class="mc-head">
+      <div class="mc-icon">📄</div>
+      <div class="mc-name">Introduction of Working Paper</div>
+      <span class="mc-tag b-purple badge">Document</span>
+    </div>
+    <p class="mc-body">Formally places your working paper on the floor. State co-sponsors when introducing.</p>
+    <div class="mc-formula">"The delegation of [Country] wishes to introduce Working Paper [number], co-sponsored by [Country A], [Country B], and [Country C]."</div>
+  </div>
+
+  <div class="motion-card">
+    <div class="mc-head">
+      <div class="mc-icon">✏️</div>
+      <div class="mc-name">Friendly Amendment</div>
+      <span class="mc-tag b-green badge">No vote needed</span>
+    </div>
+    <p class="mc-body">Proposed change to a draft resolution that the main sponsors accept. No vote required — automatically incorporated.</p>
+    <div class="mc-formula">"[Country] proposes a friendly amendment to operative clause [X]: [new language]. The main sponsors have signaled their acceptance."</div>
+  </div>
+
+  <div class="motion-card">
+    <div class="mc-head">
+      <div class="mc-icon">✏️</div>
+      <div class="mc-name">Unfriendly Amendment</div>
+      <span class="mc-tag b-red badge">Requires majority vote</span>
+    </div>
+    <p class="mc-body">Proposed change that sponsors oppose. Goes to a vote — simple majority of present members needed to incorporate it.</p>
+    <div class="mc-formula">"[Country] moves to amend operative clause [X] to read: [new language]." → Vote called immediately.</div>
+  </div>
+
+  <div class="motion-card">
+    <div class="mc-head">
+      <div class="mc-icon">🔒</div>
+      <div class="mc-name">Motion to Close Debate</div>
+      <span class="mc-tag b-red badge">Moves to vote</span>
+    </div>
+    <p class="mc-body">Ends debate on the current draft resolution and immediately triggers voting procedure. Requires a simple majority. This is how you bring a resolution to its final vote.</p>
+    <div class="mc-formula">"The delegation of [Country] motions to close debate on Draft Resolution [number] and move into voting procedure."</div>
+  </div>
+
+  <div class="motion-card">
+    <div class="mc-head">
+      <div class="mc-icon">📊</div>
+      <div class="mc-name">Division of the Question</div>
+      <span class="mc-tag b-gold badge">Advanced</span>
+    </div>
+    <p class="mc-body">Request to vote on individual clauses of a resolution separately rather than as a whole. Useful when you support some clauses but not others. Rarely used in simulations.</p>
+    <div class="mc-formula">"The delegation of [Country] moves for division of the question, requesting a separate vote on operative clause [X]."</div>
+  </div>
+
+  <div class="motion-card">
+    <div class="mc-head">
+      <div class="mc-icon">⏸</div>
+      <div class="mc-name">Motion to Table / Postpone</div>
+      <span class="mc-tag b-gold badge">Advanced</span>
+    </div>
+    <p class="mc-body">Temporarily suspends consideration of a working paper or motion without killing it. The document remains available for future consideration.</p>
+    <div class="mc-formula">"The delegation of [Country] moves to table Working Paper [number] pending further consultation."</div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- POINTS -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div id="points" class="panel">
+  <div class="section-eyebrow">Interruptions & inquiries</div>
+  <h2>All Types of Points</h2>
+
+  <div class="alert alert-gold">
+    <div class="alert-icon">⚠️</div>
+    <div class="alert-text">Points interrupt the current flow of business. Some can interrupt a speaker mid-speech. Use them precisely — overusing points damages your credibility with the Chair and other delegates.</div>
+  </div>
+
+  <div class="card red">
+    <div class="mc-head" style="margin-bottom:.5rem">
+      <div class="mc-icon">🛑</div>
+      <h3>Point of Order</h3>
+      <span class="badge b-red" style="margin-left:auto">Interrupts speaker</span>
+    </div>
+    <p>Used when a <strong>procedural rule is being violated</strong>. This is the most powerful point — it can interrupt a delegate mid-speech. Examples: a delegate exceeding their speaking time, speaking to a topic outside the agenda, or the Chair making a procedural error.</p>
+    <div class="quote">"Point of Order, Mr./Madam President — the delegate's remarks appear to exceed the scope of the current agenda item."</div>
+    <div class="alert alert-red" style="margin-top:.75rem">
+      <div class="alert-icon">⚡</div>
+      <div class="alert-text">Do NOT abuse this. Raising a bogus Point of Order to silence a strong speaker will backfire. The Chair can rule it out of order immediately.</div>
+    </div>
+  </div>
+
+  <div class="card blue">
+    <div class="mc-head" style="margin-bottom:.5rem">
+      <div class="mc-icon">❓</div>
+      <h3>Point of Inquiry / Parliamentary Inquiry</h3>
+      <span class="badge b-blue" style="margin-left:auto">Asks the Chair</span>
+    </div>
+    <p>A question directed to the <strong>Chair/President</strong> about procedure or the rules of the committee. Cannot interrupt a speaker.</p>
+    <div class="quote">"Point of Parliamentary Inquiry, Madam President — may the delegation request clarification on the current voting threshold for this draft resolution?"</div>
+  </div>
+
+  <div class="card teal">
+    <div class="mc-head" style="margin-bottom:.5rem">
+      <div class="mc-icon">💬</div>
+      <h3>Point of Information</h3>
+      <span class="badge b-teal" style="margin-left:auto">Asks a delegate</span>
+    </div>
+    <p>A question directed to <strong>another delegate</strong>, asked after their speech concludes (not during). The targeted delegate may choose to yield or decline. This is your main tool for putting other delegations on the defensive.</p>
+    <div class="quote">"Point of Information directed to the delegate of Iran — will the delegate clarify how their delegation reconciles its stated commitment to multilateralism with the unilateral seizure of commercial vessels in violation of UNCLOS Article 38?"</div>
+    <div class="alert alert-blue" style="margin-top:.75rem">
+      <div class="alert-icon">💡</div>
+      <div class="alert-text">Make your POIs sharp and specific. Vague questions get vague answers. A well-aimed POI puts the other delegate on the record with a difficult question.</div>
+    </div>
+  </div>
+
+  <div class="card purple">
+    <div class="mc-head" style="margin-bottom:.5rem">
+      <div class="mc-icon">🔁</div>
+      <h3>Right of Reply</h3>
+      <span class="badge b-purple" style="margin-left:auto">After your country is attacked</span>
+    </div>
+    <p>Used when another delegation makes a <strong>personal attack on your country or misrepresents your position</strong>. Must be requested immediately after the offending speech. The Chair grants it at their discretion. Keep it brief (30–45 seconds) and factual — do not use it for additional speech time.</p>
+    <div class="quote">"The delegation of Japan requests the Right of Reply."<br>[Chair grants it]<br>"The delegate of [X] has mischaracterized Japan's position. Japan explicitly chose NOT to join the US-led Operation Sentinel — a documented fact that directly contradicts the delegate's claim."</div>
+  </div>
+
+  <div class="card gold">
+    <div class="mc-head" style="margin-bottom:.5rem">
+      <div class="mc-icon">📢</div>
+      <h3>Point of Personal Privilege</h3>
+      <span class="badge b-gold" style="margin-left:auto">Physical discomfort</span>
+    </div>
+    <p>Used when a delegate cannot fully participate due to a <strong>physical issue</strong> — can't hear the speaker, room temperature, technical issues with their microphone, etc. Can interrupt a speaker. This is not for debate — using it for anything else is a procedural violation.</p>
+    <div class="quote">"Point of Personal Privilege — the delegation is unable to hear the speaker from this position."</div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- DEBATE TYPES -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div id="debate" class="panel">
+  <div class="section-eyebrow">Modes of debate</div>
+  <h2>Types of Debate in UNSC</h2>
+
+  <div class="card blue">
+    <h3>🎙 General Speakers List (GSL)</h3>
+    <div class="badges"><span class="badge b-blue">Formal</span><span class="badge b-blue">Opening statements</span><span class="badge b-blue">90–120 sec</span></div>
+    <p style="margin-top:.6rem">The default mode of debate. The Chair opens a list and delegates sign up. Speeches are general position statements. The GSL is always running in the background — when no caucus is active, debate returns to the GSL. Think of it as your opening argument: establish identity, plant your pillars, signal alliances.</p>
+    <div class="quote"><strong>Typical GSL structure:</strong><br>
+    Sentence 1–2: Frame the issue through your country's lens<br>
+    Sentence 3–4: State your national stake<br>
+    Sentence 5–7: Announce your policy position<br>
+    Sentence 8–9: Propose your framework / call to action</div>
+  </div>
+
+  <div class="card teal">
+    <h3>📋 Moderated Caucus</h3>
+    <div class="badges"><span class="badge b-teal">Formal</span><span class="badge b-teal">Focused topic</span><span class="badge b-teal">45–90 sec per speaker</span></div>
+    <p style="margin-top:.6rem">The workhorse of UNSC debate. A specific topic is set by the motion. The Chair recognizes speakers one at a time. <strong>This is where your prepared speeches go.</strong> Each moderated caucus should advance a specific argument pillar. Motion for one when you have a focused argument to make or when you want to steer debate toward your agenda.</p>
+    <div class="alert alert-blue" style="margin-top:.75rem">
+      <div class="alert-icon">💡</div>
+      <div class="alert-text"><strong>Strategy tip:</strong> The delegate who MOTIONS for a moderated caucus sets the topic — this is enormous power. Frame the topic in language that favors your position. "On the legal obligations of littoral states under UNCLOS" vs. "On security threats in the Persian Gulf" are the same issue but frame completely differently.</div>
+    </div>
+  </div>
+
+  <div class="card green">
+    <h3>🤝 Unmoderated Caucus</h3>
+    <div class="badges"><span class="badge b-green">Informal</span><span class="badge b-green">No record</span><span class="badge b-green">15–20 min</span></div>
+    <p style="margin-top:.6rem">Session is suspended. <strong>This is where resolutions are actually built.</strong> Use this time to: draft working paper language with allies, make private concessions to swing votes, pitch a co-sponsorship deal to China, warn the USA against military language, and neutralize opposition. Every unmod should have a specific target and outcome. Don't wander.</p>
+    <div class="quote"><strong>Unmod checklist for Japan:</strong><br>
+    □ Approach S. Korea/India first — confirm co-sponsorship<br>
+    □ Private offer to China — JCPOA clause trade<br>
+    □ Concession to Saudi — tanker seizure language<br>
+    □ Red line to USA — no military authorization clause<br>
+    □ Soft pitch to Oman — mediator role endorsement</div>
+  </div>
+
+  <div class="card gold">
+    <h3>📢 Yield Options (After a Speech)</h3>
+    <p style="margin-bottom:.75rem">After finishing a speech, a delegate may yield their remaining time in three ways:</p>
+    <div class="flow">
+      <div class="flow-step">
+        <div class="flow-num" style="background:var(--gold-bg);border-color:var(--gold-border);color:var(--gold)">1</div>
+        <div class="flow-content">
+          <h4>Yield to another delegate</h4>
+          <p>"Japan yields the floor to the delegation of South Korea." — That delegate gets your remaining time.</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num" style="background:var(--gold-bg);border-color:var(--gold-border);color:var(--gold)">2</div>
+        <div class="flow-content">
+          <h4>Yield to Points of Information</h4>
+          <p>"Japan yields to Points of Information." — Other delegates can now ask you questions. Shows confidence.</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num" style="background:var(--gold-bg);border-color:var(--gold-border);color:var(--gold)">3</div>
+        <div class="flow-content">
+          <h4>Yield to the Chair</h4>
+          <p>"Japan yields to the Chair." — Remaining time is forfeited. Most common ending.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- DOCUMENTS -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div id="documents" class="panel">
+  <div class="section-eyebrow">What you write and submit</div>
+  <h2>Documents in UNSC</h2>
+
+  <div class="flow">
+    <div class="flow-step">
+      <div class="flow-num">1</div>
+      <div class="flow-content">
+        <h4>Position Paper</h4>
+        <p>Written before the conference. States your country's official position on the agenda item. Establishes your stance before you even enter the chamber. Usually 1–2 pages. In your case — Japan's position paper you just received.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-num">2</div>
+      <div class="flow-content">
+        <h4>Working Paper</h4>
+        <p>An informal draft resolution written during the conference. Not yet in resolution format. May have signatories (supporters) and co-sponsors (endorsers). Multiple working papers can exist simultaneously. Submitted to the dais for acknowledgment — not voted on directly.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-num">3</div>
+      <div class="flow-content">
+        <h4>Draft Resolution</h4>
+        <p>A working paper that has been formally introduced on the floor, formatted correctly (PP + OP clauses), accepted by the President, and assigned an official number. This is the document that goes to a vote.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-num">4</div>
+      <div class="flow-content">
+        <h4>Resolution</h4>
+        <p>A draft resolution that has passed the vote (9+ yes, no P5 veto). In real UNSC it is legally binding on all 193 UN member states. In simulation it represents the committee's final output.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-num">5</div>
+      <div class="flow-content">
+        <h4>Amendment</h4>
+        <p>A proposed change to a specific clause of a draft resolution. Friendly amendments (accepted by sponsors) need no vote. Unfriendly amendments (rejected by sponsors) go to a simple majority vote.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card gold" style="margin-top:1.5rem">
+    <h3>Resolution Structure — PP and OP Clauses</h3>
+    <p style="margin-bottom:.75rem">Every UNSC resolution is divided into two parts:</p>
+    <div class="proc-row">
+      <div class="proc-box">
+        <div class="proc-label" style="color:var(--blue)">Preambulatory Clauses (PP)</div>
+        <p class="proc-text">Begin with past-tense verbs. Provide context, cite precedents, acknowledge the situation. <strong>Not binding.</strong><br><br>
+        Examples: <em>Recalling… Reaffirming… Deeply concerned by… Having considered… Noting with appreciation…</em></p>
+      </div>
+      <div class="proc-box">
+        <div class="proc-label" style="color:var(--green)">Operative Clauses (OP)</div>
+        <p class="proc-text">Begin with present-tense verbs. State what the Council actually DOES or CALLS UPON others to do. <strong>These are the binding actions.</strong><br><br>
+        Examples: <em>Decides… Demands… Calls upon… Authorizes… Establishes… Urges… Encourages…</em></p>
+      </div>
+    </div>
+    <div class="alert alert-gold" style="margin-top:.75rem">
+      <div class="alert-icon">⚡</div>
+      <div class="alert-text"><strong>"Decides"</strong> is the strongest operative verb — legally binding. <strong>"Urges"</strong> is the weakest — merely recommendatory. Choose your verbs strategically based on what you can get passed through a P5 veto.</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- VOTING -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div id="voting" class="panel">
+  <div class="section-eyebrow">The final step</div>
+  <h2>Voting Procedure</h2>
+
+  <div class="card red">
+    <h3>⚠️ The UNSC Threshold — Different from Everything Else</h3>
+    <div class="badges">
+      <span class="badge b-green">9 Affirmative Votes Required</span>
+      <span class="badge b-red">Zero P5 Negative Votes</span>
+    </div>
+    <p style="margin-top:.75rem">This is the single most important rule. Out of 15 members, you need at least <strong>9 yes votes</strong>. But even if you get all 14 other votes, <strong>a single NO from any P5 member kills the resolution.</strong> Abstentions by P5 members do NOT constitute a veto.</p>
+  </div>
+
+  <div class="vote-vis">
+    <p style="font-size:12px;color:var(--text3);font-family:'IBM Plex Mono',monospace;margin-bottom:.75rem">EXAMPLE: Resolution passes with 11-2-2</p>
+    <div class="proc-label" style="color:var(--green)">YES (11)</div>
+    <div class="vote-row">
+      <span class="vchip vc-yes">🇯🇵 Japan</span>
+      <span class="vchip vc-yes">🇰🇷 S. Korea</span>
+      <span class="vchip vc-yes">🇮🇳 India</span>
+      <span class="vchip vc-yes">🇫🇷 France ★P5</span>
+      <span class="vchip vc-yes">🇬🇧 UK ★P5</span>
+      <span class="vchip vc-yes">🇩🇪 Germany</span>
+      <span class="vchip vc-yes">🇶🇦 Qatar</span>
+      <span class="vchip vc-yes">🇴🇲 Oman</span>
+      <span class="vchip vc-yes">🇰🇼 Kuwait</span>
+      <span class="vchip vc-yes">🇦🇪 UAE</span>
+      <span class="vchip vc-yes">🇯🇴 Jordan</span>
+    </div>
+    <div class="proc-label" style="color:var(--text2);margin-top:.6rem">ABSTAIN (2)</div>
+    <div class="vote-row">
+      <span class="vchip vc-abs">🇷🇺 Russia ★P5 — abstains (NOT a veto)</span>
+      <span class="vchip vc-abs">🇨🇳 China ★P5 — abstains</span>
+    </div>
+    <div class="proc-label" style="color:var(--red);margin-top:.6rem">NO (2)</div>
+    <div class="vote-row">
+      <span class="vchip vc-no">🇮🇷 Iran</span>
+      <span class="vchip vc-no">🇸🇾 Syria</span>
+    </div>
+    <p style="font-size:12px;color:var(--green);margin-top:.75rem;font-family:'IBM Plex Mono',monospace">✅ RESOLUTION PASSES — 9+ yes, no P5 negative vote</p>
+  </div>
+
+  <div class="vote-vis" style="margin-top:.75rem">
+    <p style="font-size:12px;color:var(--text3);font-family:'IBM Plex Mono',monospace;margin-bottom:.75rem">EXAMPLE: Resolution VETOED despite 14 yes votes</p>
+    <div class="vote-row">
+      <span class="vchip vc-yes">14 countries vote YES</span>
+      <span class="vchip vc-veto">🇷🇺 Russia votes NO ★VETO</span>
+    </div>
+    <p style="font-size:12px;color:var(--red);margin-top:.75rem;font-family:'IBM Plex Mono',monospace">❌ RESOLUTION FAILS — one P5 negative vote kills it entirely</p>
+  </div>
+
+  <div class="card gold" style="margin-top:1rem">
+    <h3>Roll Call Vote vs. Placard Vote</h3>
+    <p>The Chair may call the vote in two ways:</p>
+    <ul style="margin-top:.5rem">
+      <li><strong>Placard Vote:</strong> Quick — delegates raise placards for YES, NO, ABSTAIN. Used for procedural motions.</li>
+      <li><strong>Roll Call Vote:</strong> Formal — each delegation is called by name and states their vote aloud. Used for substantive resolutions. This is what the final vote on a draft resolution looks like.</li>
+    </ul>
+  </div>
+
+  <div class="card blue" style="margin-top:1rem">
+    <h3>Present vs. Present and Voting</h3>
+    <p>During roll call at the start of session, how you respond matters:</p>
+    <ul style="margin-top:.5rem">
+      <li><strong>"Present"</strong> — you may vote Yes, No, OR Abstain</li>
+      <li><strong>"Present and Voting"</strong> — you commit to voting Yes or No only. <strong>You cannot abstain.</strong></li>
+    </ul>
+    <p style="margin-top:.5rem">For Japan's position — respond <strong>"Present"</strong> to preserve the abstention option as a diplomatic tool if needed.</p>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- VETO -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div id="veto" class="panel">
+  <div class="section-eyebrow">The nuclear option</div>
+  <h2>The P5 Veto — Complete Guide</h2>
+
+  <div class="card red">
+    <h3>What is the Veto?</h3>
+    <p>Under Article 27(3) of the UN Charter, any <strong>substantive</strong> resolution requires the "concurring votes" of all five permanent members. In practice, this means a single NO vote from any P5 member — USA, UK, France, Russia, or China — defeats the resolution permanently. The veto has no override mechanism. There is no appeal.</p>
+  </div>
+
+  <div class="card gold">
+    <h3>Substantive vs. Procedural Matters</h3>
+    <div class="proc-row">
+      <div class="proc-box">
+        <div class="proc-label" style="color:var(--red)">Substantive (veto applies)</div>
+        <p class="proc-text">Resolutions authorizing action, sanctions, peacekeeping missions, ceasefire demands, ICC referrals. Anything that makes a decision affecting a state's sovereignty or behavior.</p>
+      </div>
+      <div class="proc-box">
+        <div class="proc-label" style="color:var(--green)">Procedural (no veto)</div>
+        <p class="proc-text">Motions to hold a meeting, set the agenda, invite non-member states to speak, or other housekeeping matters. Only simple majority needed — P5 cannot veto these.</p>
+      </div>
+    </div>
+    <div class="alert alert-gold" style="margin-top:.75rem">
+      <div class="alert-icon">⚠️</div>
+      <div class="alert-text">The "double veto" — A P5 member can veto the characterization of a matter as procedural, effectively vetoing the procedural vote itself. This is controversial but technically possible.</div>
+    </div>
+  </div>
+
+  <div class="card purple">
+    <h3>Veto History & Real-World Context</h3>
+    <ul>
+      <li>Russia has used the veto <strong>140+ times</strong> — more than any other P5 member</li>
+      <li>USA has used it <strong>80+ times</strong> — mostly to protect Israel from UNSC action</li>
+      <li>China and Russia have <strong>jointly vetoed</strong> resolutions on Syria 16 times</li>
+      <li>In 2022, Russia vetoed a resolution condemning its invasion of Ukraine</li>
+      <li>The UK and France have not used the veto since <strong>1989</strong></li>
+      <li>On Strait of Hormuz: Russia and China are the veto threats for any Western-leaning resolution</li>
+    </ul>
+  </div>
+
+  <div class="card teal">
+    <h3>How to Work Around a Veto (In Simulation)</h3>
+    <ul>
+      <li><strong>Soften the operative verbs:</strong> Change "Demands" → "Calls upon" → "Encourages" until the objecting P5 member can abstain instead of vote no</li>
+      <li><strong>Give the P5 member a win:</strong> Include a clause that reflects their stated position — Russia gets "anti-unilateral sanctions" language, China gets "JCPOA co-authorship" credit</li>
+      <li><strong>Split the resolution:</strong> Pass the uncontroversial parts (UNCLOS reaffirmation) separately from the controversial ones (monitoring mission)</li>
+      <li><strong>Private diplomacy:</strong> In unmod, make the P5 member an explicit offer — what do they need to abstain instead of veto?</li>
+      <li><strong>The Uniting for Peace precedent:</strong> If UNSC deadlocks due to veto, an emergency special session of the GA can be called under UNGA Res. 377 — not available in UNSC sim but good to know</li>
+    </ul>
+  </div>
+
+  <div class="card blue">
+    <h3>Even a Vetoed Resolution Can Be a Win (In MUN)</h3>
+    <p>If your resolution gets 11+ votes but is vetoed by Russia, you have demonstrated that:</p>
+    <ul style="margin-top:.5rem">
+      <li>Your coalition-building was successful</li>
+      <li>Your resolution was balanced and persuasive</li>
+      <li>Russia/China isolated themselves and took the blame</li>
+      <li>You showed leadership even without a passage</li>
+    </ul>
+    <p style="margin-top:.5rem">In MUN awards, chairs evaluate leadership, diplomacy, and speech quality — not just whether your resolution passed. A well-built vetoed resolution often wins more awards than a weak resolution that barely scraped 9 votes.</p>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- VS GA -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div id="vsga" class="panel">
+  <div class="section-eyebrow">Critical differences</div>
+  <h2>UNSC vs. General Assembly — Key Differences</h2>
+
+  <table class="ctable">
+    <thead>
+      <tr>
+        <th>Feature</th>
+        <th>UNSC</th>
+        <th>General Assembly</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Membership</strong></td>
+        <td>15 members (5 permanent, 10 elected)</td>
+        <td>193 members — all UN states</td>
+      </tr>
+      <tr>
+        <td><strong>Binding authority</strong></td>
+        <td class="yes">✅ Resolutions are legally binding on all states</td>
+        <td class="no">❌ Resolutions are recommendations only</td>
+      </tr>
+      <tr>
+        <td><strong>Voting threshold</strong></td>
+        <td class="warn">9 affirmative votes (out of 15)</td>
+        <td>Simple majority (or 2/3 on important questions)</td>
+      </tr>
+      <tr>
+        <td><strong>Veto power</strong></td>
+        <td class="red">P5 can veto any substantive resolution</td>
+        <td>No veto exists</td>
+      </tr>
+      <tr>
+        <td><strong>Addressing the Chair</strong></td>
+        <td>"Mr./Madam <strong>President</strong>"</td>
+        <td>"Honorable <strong>Chair</strong>"</td>
+      </tr>
+      <tr>
+        <td><strong>Speech length</strong></td>
+        <td>Short — 60–90 seconds typical</td>
+        <td>Longer — 90–150 seconds typical</td>
+      </tr>
+      <tr>
+        <td><strong>Previous Question motion</strong></td>
+        <td>Not typically used</td>
+        <td>Common procedural tool</td>
+      </tr>
+      <tr>
+        <td><strong>Working papers</strong></td>
+        <td>Used; fewer co-sponsors needed due to small body</td>
+        <td>More common; need many co-sponsors</td>
+      </tr>
+      <tr>
+        <td><strong>Agenda setting</strong></td>
+        <td>President of Council sets agenda; more Chair control</td>
+        <td>Delegates can motion for agenda items</td>
+      </tr>
+      <tr>
+        <td><strong>Role of Chair</strong></td>
+        <td>Very strong — President controls debate flow heavily</td>
+        <td>Moderate — delegates have more procedural autonomy</td>
+      </tr>
+      <tr>
+        <td><strong>Chapter VII action</strong></td>
+        <td class="yes">✅ Can authorize military force, sanctions</td>
+        <td class="no">❌ Cannot authorize enforcement action</td>
+      </tr>
+      <tr>
+        <td><strong>Speed of sessions</strong></td>
+        <td>More intense — every delegate speaks often</td>
+        <td>Slower — 193 delegates, longer queue</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="alert alert-gold" style="margin-top:.5rem">
+    <div class="alert-icon">🎯</div>
+    <div class="alert-text"><strong>The biggest trap for GA-trained delegates in UNSC:</strong> Saying "Honorable Chair" instead of "Mr./Madam President." Also: forgetting that you only need 9 votes (not a majority of 193), and failing to take the P5 veto threat seriously during resolution drafting.</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- CHEAT SHEET -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div id="cheatsheet" class="panel">
+  <div class="section-eyebrow">Quick reference</div>
+  <h2>⚡ UNSC Cheat Sheet</h2>
+
+  <div class="cheat-grid">
+    <div class="cheat-box">
+      <div class="cheat-q">I want to speak</div>
+      <div class="cheat-a">"[Country] requests the floor."</div>
+    </div>
+    <div class="cheat-box">
+      <div class="cheat-q">I want a focused debate</div>
+      <div class="cheat-a">"[Country] motions for a moderated caucus of [X min], [Y sec] per speaker, on [topic]."</div>
+    </div>
+    <div class="cheat-box">
+      <div class="cheat-q">I want to negotiate privately</div>
+      <div class="cheat-a">"[Country] motions for an unmoderated caucus of [X min] for working paper consultation."</div>
+    </div>
+    <div class="cheat-box">
+      <div class="cheat-q">I need more time in caucus</div>
+      <div class="cheat-a">"[Country] motions to extend the current caucus by [X min]."</div>
+    </div>
+    <div class="cheat-box">
+      <div class="cheat-q">I want to introduce my paper</div>
+      <div class="cheat-a">"[Country] wishes to introduce Working Paper [#], co-sponsored by [A], [B], [C]."</div>
+    </div>
+    <div class="cheat-box">
+      <div class="cheat-q">I want to bring my paper to a vote</div>
+      <div class="cheat-a">"[Country] motions to close debate on Draft Resolution [#] and move into voting procedure."</div>
+    </div>
+    <div class="cheat-box">
+      <div class="cheat-q">A rule is being broken</div>
+      <div class="cheat-a">"Point of Order — [state the violation]."</div>
+    </div>
+    <div class="cheat-box">
+      <div class="cheat-q">I want to ask another delegate a question</div>
+      <div class="cheat-a">"Point of Information directed to the delegate of [Country] — [question]?"</div>
+    </div>
+    <div class="cheat-box">
+      <div class="cheat-q">My country was misrepresented</div>
+      <div class="cheat-a">"[Country] requests the Right of Reply."</div>
+    </div>
+    <div class="cheat-box">
+      <div class="cheat-q">I have a procedure question for the Chair</div>
+      <div class="cheat-a">"Point of Parliamentary Inquiry — [question for the Chair]?"</div>
+    </div>
+    <div class="cheat-box">
+      <div class="cheat-q">I can't hear / technical issue</div>
+      <div class="cheat-a">"Point of Personal Privilege — [state the issue]."</div>
+    </div>
+    <div class="cheat-box">
+      <div class="cheat-q">After my speech ends</div>
+      <div class="cheat-a">"[Country] yields to the Chair." / "...yields to [Delegate]." / "...yields to Points of Information."</div>
+    </div>
+    <div class="cheat-box">
+      <div class="cheat-q">How to address the Chair</div>
+      <div class="cheat-a">"Mr./Madam President" — NEVER "Honorable Chair"</div>
+    </div>
+    <div class="cheat-box">
+      <div class="cheat-q">Votes needed to pass</div>
+      <div class="cheat-a">9 yes votes + no P5 negative vote</div>
+    </div>
+    <div class="cheat-box">
+      <div class="cheat-q">P5 abstaining — does it block?</div>
+      <div class="cheat-a">NO. Only a P5 "No" vote is a veto. Abstention ≠ veto.</div>
+    </div>
+    <div class="cheat-box">
+      <div class="cheat-q">At roll call, say</div>
+      <div class="cheat-a">"Present" (to preserve abstention option) not "Present and Voting"</div>
+    </div>
+  </div>
+
+  <div class="card gold" style="margin-top:1.5rem">
+    <h3>Complete Session Order — At a Glance</h3>
+    <div class="flow">
+      <div class="flow-step">
+        <div class="flow-num">1</div>
+        <div class="flow-content"><h4>Roll Call → Quorum → Agenda Adopted</h4></div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">2</div>
+        <div class="flow-content"><h4>GSL Opens → Opening Speeches (position statements)</h4></div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">3</div>
+        <div class="flow-content"><h4>Moderated Caucuses → Focused debate on subtopics</h4></div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">4</div>
+        <div class="flow-content"><h4>Unmoderated Caucus → Draft working papers, build blocs</h4></div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">5</div>
+        <div class="flow-content"><h4>Working Paper introduced → Debate on clauses</h4></div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">6</div>
+        <div class="flow-content"><h4>Working Paper → upgraded to Draft Resolution</h4></div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">7</div>
+        <div class="flow-content"><h4>Amendments (if any) → voted on</h4></div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">8</div>
+        <div class="flow-content"><h4>Motion to Close Debate → Voting Procedure begins</h4></div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">9</div>
+        <div class="flow-content"><h4>Roll Call Vote → 9+ yes + no P5 veto = RESOLUTION PASSED</h4></div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">10</div>
+        <div class="flow-content"><h4>Explanations of Vote → Session closes</h4></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert alert-blue" style="margin-top:1rem">
+    <div class="alert-icon">🇯🇵</div>
+    <div class="alert-text"><strong>Japan-specific reminder for tomorrow:</strong> You are a non-P5 elected member. You have no veto. Your power is coalition leadership and credibility. Motion for moderated caucuses to set the debate agenda. Use your first unmod to lock in South Korea and India. The moment you have France on your paper, Russia's veto becomes politically costly. Go win it.</div>
+  </div>
+</div>
+
+<script>
+function show(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nbtn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  const order = ['overview','composition','flow','motions','points','debate','documents','voting','veto','vsga','cheatsheet'];
+  document.querySelectorAll('.nbtn')[order.indexOf(id)].classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>
